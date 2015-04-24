@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "SHIP.h"
+#include "BOMB.h"
 class Board
 {
 public:

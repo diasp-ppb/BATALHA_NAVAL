@@ -76,9 +76,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\BAtalhaNaval2\BAtalhaNaval2\Source1.cpp" />
     <ClCompile Include="BOARD.cpp" />
     <ClCompile Include="BOMB.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="SHIP.cpp" />
     <ClCompile Include="PLAYER.cpp" />
   </ItemGroup>
