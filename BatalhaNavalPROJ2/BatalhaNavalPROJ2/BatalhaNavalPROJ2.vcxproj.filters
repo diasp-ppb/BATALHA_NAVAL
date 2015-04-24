@@ -47,11 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\BAtalhaNaval2\BAtalhaNaval2\configBN.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BOMB.h">
       <Filter>Header Files\BOMB</Filter>
     </ClInclude>
@@ -67,5 +62,10 @@
     <ClInclude Include="TYPES.h">
       <Filter>Header Files\TYPES</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="configBN.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

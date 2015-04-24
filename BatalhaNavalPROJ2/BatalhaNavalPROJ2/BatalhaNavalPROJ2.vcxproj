@@ -83,14 +83,14 @@
     <ClCompile Include="PLAYER.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\BAtalhaNaval2\BAtalhaNaval2\configBN.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BOMB.h" />
     <ClInclude Include="BOARD.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="SHIP.h" />
     <ClInclude Include="TYPES.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="configBN.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
