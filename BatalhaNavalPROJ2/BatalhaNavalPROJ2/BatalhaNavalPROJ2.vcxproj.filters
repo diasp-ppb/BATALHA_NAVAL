@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\BOMB">
+      <UniqueIdentifier>{4a699900-99c3-46e4-8943-1529717a44bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SHIP">
+      <UniqueIdentifier>{f3eb6225-872e-4c02-801f-3e791a8ab013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BOARD">
+      <UniqueIdentifier>{1fcf5c5e-87d5-41f2-a824-0f8449fe9d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PLAYER">
+      <UniqueIdentifier>{5838c6af-5156-4659-a32e-0ce8c7be5dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TYPES">
+      <UniqueIdentifier>{ec086c17-4471-407b-be3c-cc97dde26843}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\BAtalhaNaval2\BAtalhaNaval2\Source1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SHIP.cpp">
+      <Filter>Header Files\SHIP</Filter>
+    </ClCompile>
+    <ClCompile Include="BOMB.cpp">
+      <Filter>Header Files\BOMB</Filter>
+    </ClCompile>
+    <ClCompile Include="BOARD.cpp">
+      <Filter>Header Files\BOARD</Filter>
+    </ClCompile>
+    <ClCompile Include="PLAYER.cpp">
+      <Filter>Header Files\PLAYER</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\BAtalhaNaval2\BAtalhaNaval2\configBN.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BOMB.h">
+      <Filter>Header Files\BOMB</Filter>
+    </ClInclude>
+    <ClInclude Include="SHIP.h">
+      <Filter>Header Files\SHIP</Filter>
+    </ClInclude>
+    <ClInclude Include="BOARD.h">
+      <Filter>Header Files\BOARD</Filter>
+    </ClInclude>
+    <ClInclude Include="PLAYER.h">
+      <Filter>Header Files\PLAYER</Filter>
+    </ClInclude>
+    <ClInclude Include="TYPES.h">
+      <Filter>Header Files\TYPES</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
