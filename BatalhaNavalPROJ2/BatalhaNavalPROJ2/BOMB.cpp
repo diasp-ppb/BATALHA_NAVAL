@@ -1,24 +1,40 @@
 #include <iostream>
 #include "BOMB.h"
-#include "TYPE.h"
+#include "TYPES.h"
 
+// Bomb Constructor
 Bomb::Bomb(PositionChar targetPosition)
 {
-	unsigned int offset = (rand() % 2); // gera offset de 0 ou 1 aleatoriamente
-	unsigned int direction = (rand() % 4); // gera direeçao do offset (0, 1, 2, 3) aleatoriamente
-	unsigned int linha = targetPosition.lin, coluna = targetPosition.col;
+	unsigned int offset = (rand() % 3); // generates 0, 1 or 2 randomly. 
+	unsigned int line = targetPosition.lin, column = targetPosition.col;
 
 	// fazer condiçao de calhar fora do tabuleiro
 
-	if (offset == 1)
+	if (offset == 0) // 1/3 chance
 	{
-		if (direction == 0) // direçao Norte
-			linha--;
-		else if (direction == 1) // direçao Este
-			coluna++;
-		else if (direction == 2) // direeçao Sul
-			linha++;
-		else if (direction == 3) // direeçao Oeste
+		unsigned int direction = (rand() % 4); // generates direction of offset
+		if (direction == 0) // Norte
+			line--;
+		else if (direction == 1) // Este
+			column++;
+		else if (direction == 2) // Sul
+			line++;
+		else if (direction == 3) // Oeste
+			column--;
 	}
+}
+
+// returns target position, using the private values
+PositionChar Bomb::getTargetPosition() const 
+{
+	PositionChar target;
+	target.col = targetLine;
+	target.lin = targetColumn;
+
+	return target;
+}
+
+void show() const
+{
 
 }
