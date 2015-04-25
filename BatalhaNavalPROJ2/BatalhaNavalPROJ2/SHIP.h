@@ -13,8 +13,16 @@ class Ship
 public:
 	Ship(char symbol, PositionChar position, char orientation, unsigned int size,
 		unsigned int color);
-	// OTHER METHODS, if necessary
-	// ...
+	//==========================FUNCOES ADICIONAIS ==========================
+
+	char get_ship_symbol();
+	unsigned int get_ship_position_col();
+	unsigned int get_ship_position_lin();
+	char get_ship_orientation();
+	unsigned int get_ship_size();
+	unsigned int get_ship_color();
+
+	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int
 		columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
 		bool moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
