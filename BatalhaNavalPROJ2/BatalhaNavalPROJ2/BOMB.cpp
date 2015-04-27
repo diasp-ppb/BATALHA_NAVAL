@@ -2,6 +2,23 @@
 #include "BOMB.h"
 #include "TYPES.h"
 
+// sets target position values
+void Bomb::setValues(char lin, char col)
+{
+	targetLine = lin;
+	targetColumn = col;
+}
+
+// returns target position, using the private values
+PositionChar Bomb::getTargetPosition() const 
+{
+	PositionChar target;
+	target.col = targetLine;
+	target.lin = targetColumn;
+
+	return target;
+}
+
 // Bomb Constructor
 Bomb::Bomb(PositionChar targetPosition)
 {
@@ -22,16 +39,6 @@ Bomb::Bomb(PositionChar targetPosition)
 		else if (direction == 3) // Oeste
 			column--;
 	}
-}
-
-// returns target position, using the private values
-PositionChar Bomb::getTargetPosition() const 
-{
-	PositionChar target;
-	target.col = targetLine;
-	target.lin = targetColumn;
-
-	return target;
 }
 
 void show() const
