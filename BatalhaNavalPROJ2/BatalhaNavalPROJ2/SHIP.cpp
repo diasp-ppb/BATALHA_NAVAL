@@ -31,6 +31,16 @@ unsigned int  Ship::get_ship_color()
 
 
 //=============================================================================
+Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int size,	unsigned int color)
+{
+	this->symbol = symbol;
+	this->position.col = position.col;
+	this->position.lin = position.lin;
+	this->orientation = orientation;
+	this->size = size;
+	this->color = color;
+}
+
 bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax)// moves the boat 
 {
 	int col = position.col;

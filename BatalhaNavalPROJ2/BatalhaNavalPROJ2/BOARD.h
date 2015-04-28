@@ -14,8 +14,10 @@ public:
 	bool attack(const Bomb &b);
 	void display() const; // displays the colored board during the game
 	void show() const; // shows the attributes of the board (for debugging)
-	// OTHER METHODS, if necessary
-	// ...
+
+	//==========================FUNCOES ADICIONAIS ==========================
+	int get_board_position(unsigned int lin, unsigned int col);
+	//=============================================================================
 private:
 	int numLines, numColumns; // redundant info …
 	vector<Ship> ships; // ships that are placed on the board
