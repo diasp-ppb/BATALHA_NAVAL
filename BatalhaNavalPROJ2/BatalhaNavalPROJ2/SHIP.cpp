@@ -8,23 +8,23 @@ char Ship::get_ship_symbol()
 {
 	return symbol;
 }
-unsigned int Ship::get_ship_position_col()
+unsigned int Ship::get_ship_position_col() const
 {
 	return position.col;
 }
-unsigned int Ship::get_ship_position_lin()
+unsigned int Ship::get_ship_position_lin() const
 {
 	return position.lin;
 }
-char  Ship::get_ship_orientation()
+char  Ship::get_ship_orientation() const
 {
 	return orientation;
 }
-unsigned int  Ship::get_ship_size()
+unsigned int  Ship::get_ship_size() const
 {
 	return size;
 }
-unsigned int  Ship::get_ship_color()
+unsigned int  Ship::get_ship_color() const
 {
 	return color;
 }
@@ -43,8 +43,8 @@ Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int si
 
 bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax)// moves the boat 
 {
-	int col = position.col;
-	int lin = position.lin;
+	unsigned int col = position.col;
+	unsigned int lin = position.lin;
 	char ori = orientation;
 	switch (direction) // faz o calculo para verificar se o deslocamento na direcao é possivel.
 	{
@@ -86,14 +86,14 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 }
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
-	unsigned int  move = rand() % 4;
+	/*unsigned int  move = rand() % 4;
 	switch (move)
 	{
 	default:
 	case 1 :
-
-	}
-
+	
+	}*/
+	return true;
 }
 bool Ship::attack(size_t partNumber) //partNumber = {0,1,…, size-1}
 {
@@ -109,7 +109,7 @@ bool Ship::attack(size_t partNumber) //partNumber = {0,1,…, size-1}
 bool Ship::isDestroyed() const // checks whether the ship is destroyed
 {
 	bool valid = false;
-	unsigned int counter;
+	unsigned int counter = 0;
 	for (size_t i = 0; i < size; i++) // ciclo para percorrer a string status 
 	{
 		if (islower(status[i]))

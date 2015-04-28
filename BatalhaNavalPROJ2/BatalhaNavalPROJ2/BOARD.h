@@ -16,7 +16,9 @@ public:
 	void show() const; // shows the attributes of the board (for debugging)
 
 	//==========================FUNCOES ADICIONAIS ==========================
-	int get_board_position(unsigned int lin, unsigned int col);
+	int  get_board_position(unsigned int lin, unsigned int col);
+	void set_board_position(unsigned int lin, unsigned int col,int mark);
+	void resize_board();//redimensiona o tabuleiro 
 	//=============================================================================
 private:
 	int numLines, numColumns; // redundant info …

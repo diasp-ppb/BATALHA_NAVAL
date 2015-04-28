@@ -88,9 +88,9 @@
   <ItemGroup>
     <ClInclude Include="BOMB.h" />
     <ClInclude Include="BOARD.h" />
+    <ClInclude Include="TYPES.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="SHIP.h" />
-    <ClInclude Include="TYPES.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

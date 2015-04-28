@@ -40,8 +40,9 @@ Bomb::Bomb(PositionChar targetPosition)
 			column--;
 	}
 }
-
+/*
 void show() const
 {
 
 }
+*/

@@ -16,11 +16,11 @@ public:
 	//==========================FUNCOES ADICIONAIS ==========================
 
 	char get_ship_symbol();
-	unsigned int get_ship_position_col();
-	unsigned int get_ship_position_lin();
-	char get_ship_orientation();
-	unsigned int get_ship_size();
-	unsigned int get_ship_color();
+	unsigned int get_ship_position_col() const;
+	unsigned int get_ship_position_lin() const;
+	char get_ship_orientation() const;
+	unsigned int get_ship_size() const;
+	unsigned int get_ship_color() const;
 
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int

@@ -19,7 +19,7 @@ char askCoord()
 
 	return coord;
 }
-
+/*
 Bomb getBomb() const
 {
 	char lin, col;
@@ -30,3 +30,4 @@ Bomb getBomb() const
 	cout << "Coluna: ";
 	col = askCoord();
 }
+*/
