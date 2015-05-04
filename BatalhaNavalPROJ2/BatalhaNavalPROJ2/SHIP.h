@@ -21,6 +21,8 @@ public:
 	char get_ship_orientation() const;
 	unsigned int get_ship_size() const;
 	unsigned int get_ship_color() const;
+	string get_ship_status() const;
+	void set_default_status();
 
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int

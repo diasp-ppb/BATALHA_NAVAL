@@ -28,7 +28,21 @@ unsigned int  Ship::get_ship_color() const
 {
 	return color;
 }
+string Ship::get_ship_status() const
+{
+	return status;
+}
+void Ship::set_default_status()
+{
+	string a;
+	a.resize(size);
+	for (size_t i = 0; i < size; i++)//cria o defaul do status tipo "PPPPP"
+	{
+		a[i]= symbol;
+	}
+	status = a;
 
+}
 
 //=============================================================================
 Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int size,	unsigned int color)
@@ -45,8 +59,10 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 {
 	unsigned int col = position.col;
 	unsigned int lin = position.lin;
+	unsigned int maxcol;
+	unsigned int maxlin;
 	char ori = orientation;
-	switch (direction) // faz o calculo para verificar se o deslocamento na direcao é possivel.
+	switch (direction) // o deslocamento na direcao
 	{
 		case 'N':
 				lin--;
@@ -67,18 +83,18 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		if (ori == 'H')
 		{
 			ori = 'V';
-			col = col - size;
-			lin = lin + size;
+			maxcol = col;
+			maxlin = lin + size;
 		}
 		else
 		{
 			ori = 'H';
-			col = col + size;
-			lin = lin - size;
+			maxcol = col + size;
+			maxlin = lin;
 		}
 	}
 
-	if (lin < lineMin || lin >lineMax || col < columnMin || col > columnMax) //verifica se sai fora do tabuleiro
+	if (lin < lineMin || maxlin >lineMax || col < columnMin || maxcol > columnMax) //verifica se sai fora do tabuleiro
 	{
 		return false;
 	}
@@ -89,9 +105,14 @@ bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int l
 	/*unsigned int  move = rand() % 4;
 	switch (move)
 	{
-	default:
-	case 1 :
-	
+		case 0: // NO MOVE
+			return true;
+			break;
+		case 1:
+			
+		case 2:
+		case 3:
+		case 4:
 	}*/
 	return true;
 }

@@ -17,7 +17,14 @@ string Select_file()
 }
 
 void main()
-{
+{   ////////////////////CONFIG TABULEIRO ///////////////////////////////////
 	Board TABU =  Board(Select_file());
+	TABU.resize_board();
+	TABU.place_all_the_ships();
+	TABU.set_default_status_all_ships();
+	/////////////////////////////////////////////////////////////////////// 
 	TABU.show();
+	system("PAUSE");
+	system("cls");
+	TABU.display();
 }

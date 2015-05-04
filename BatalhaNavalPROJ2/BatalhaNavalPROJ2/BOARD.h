@@ -19,6 +19,9 @@ public:
 	int  get_board_position(unsigned int lin, unsigned int col);
 	void set_board_position(unsigned int lin, unsigned int col,int mark);
 	void resize_board();//redimensiona o tabuleiro 
+	void remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation);
+	void place_all_the_ships(); // mete os navios pertencentes ao vector no tabuleiro  VER A QUESTAO DO VOID COM UM BOOL DENTRO
+	void set_default_status_all_ships();
 	//=============================================================================
 private:
 	int numLines, numColumns; // redundant info …
