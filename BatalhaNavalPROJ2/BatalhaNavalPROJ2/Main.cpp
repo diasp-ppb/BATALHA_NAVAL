@@ -24,6 +24,7 @@ void main()
 	TABU.place_all_the_ships();
 	TABU.set_default_status_all_ships();
 	///////////////////////////////////////////////////////////////////////
+	/*
 	Beep(330, 100); Sleep(100);
 	Beep(330, 100); Sleep(300);
 	Beep(330, 100); Sleep(300);
@@ -125,6 +126,7 @@ void main()
 	Beep(220, 200); Sleep(50);
 	Beep(196, 100); Sleep(700);
 	/*Intro*/
+/*
 	Beep(330, 100); Sleep(100);
 	Beep(330, 100); Sleep(300);
 	Beep(330, 100); Sleep(300);
@@ -158,7 +160,7 @@ void main()
 	Beep(932, 100); Sleep(125);
 	Beep(932, 100); Sleep(125);
 	Beep(932, 100); Sleep(125);
-	Beep(1046, 675);
+	Beep(1046, 675);*/
 	/////////////////////////////////////////////////////////////////////// 
 	TABU.show();
 	system("PAUSE");

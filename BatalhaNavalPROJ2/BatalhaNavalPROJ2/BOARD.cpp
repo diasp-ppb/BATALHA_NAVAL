@@ -47,10 +47,7 @@ Board::Board(const string &filename)
 		PositionChar position;
 		unsigned int color, syze;
 		ReadConfig >> type >> syze >> position.lin >> position.col >> orientation >> color;// obtem cas carateristicas do navio;
-		PositionChar intposition;
-		intposition.col = position.col - 97; //codigo 1º col a -> 97;
-		intposition.lin = position.lin - 65; //codigo 1º linha A -> 65;
-		ships.push_back(Ship(type, intposition, orientation, syze, color)); // ATENCAO OPERACAO A VERIFICAR
+		ships.push_back(Ship(type, position, orientation, syze, color)); // ATENCAO OPERACAO A VERIFICAR
 	}
 
 	ReadConfig.close();

@@ -50,8 +50,8 @@ void Ship::set_default_status()
 Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int size,	unsigned int color)
 {
 	this->symbol = symbol;
-	this->position.col = position.col;
-	this->position.lin = position.lin;
+	this->position.col = position.col - 97;
+	this->position.lin = position.lin - 65;
 	this->orientation = orientation;
 	this->size = size;
 	this->color = color;
@@ -120,8 +120,8 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 }
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
-	unsigned int  move = rand() % 4;
-	unsigned int rota = rand() % 1; // true or false;
+	unsigned int  move = rand() % 5;
+	unsigned int rota = rand() % 2; // true or false;
 	bool rotation = true;
 	if (rota == 0) rotation = false;
 
@@ -135,14 +135,14 @@ bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int l
 }
 bool Ship::attack(size_t partNumber) //partNumber = {0,1,…, size-1}
 {
-	bool valid_shot = false;
+	
 	if (partNumber < size)
 	{
 		status[partNumber] = tolower(symbol);
-		valid_shot = true;
+		return true;
 	}
 	
-	return valid_shot;
+	return false;
 }
 bool Ship::isDestroyed() const // checks whether the ship is destroyed
 {
