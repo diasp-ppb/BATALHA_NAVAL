@@ -20,8 +20,9 @@ public:
 	void set_board_position(unsigned int lin, unsigned int col,int mark);
 	void resize_board();//redimensiona o tabuleiro 
 	void remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation);
-	void place_all_the_ships(); // mete os navios pertencentes ao vector no tabuleiro  VER A QUESTAO DO VOID COM UM BOOL DENTRO
-	void set_default_status_all_ships();
+	void place_all_the_ships(); // coloca na tabuleiro os navios pertencentes ao vector no tabuleiro  VER A QUESTAO DO VOID COM UM BOOL DENTRO
+	void set_default_status_all_ships();// coloca todos os navios com 100% de vida 
+	bool check_over_position_ship(Ship &ship);//ve se sobrepoe outro navio no tabuleiro.
 	//=============================================================================
 private:
 	int numLines, numColumns; // redundant info …

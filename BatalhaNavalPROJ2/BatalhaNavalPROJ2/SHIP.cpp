@@ -1,6 +1,8 @@
 #include "TYPES.h"
 #include "SHIP.h"
 #include <iostream>
+#include "BOARD.h"
+
 
 
 //==========================FUNCOES ADICIONAIS ==========================
@@ -36,7 +38,7 @@ void Ship::set_default_status()
 {
 	string a;
 	a.resize(size);
-	for (size_t i = 0; i < size; i++)//cria o defaul do status tipo "PPPPP"
+	for (size_t i = 0; i < size; i++)//cria o default do status tipo "PPPPP"
 	{
 		a[i]= symbol;
 	}
@@ -62,6 +64,17 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 	unsigned int maxcol;
 	unsigned int maxlin;
 	char ori = orientation;
+	if (orientation == 'H')
+	{
+		maxcol = col + size;
+		maxlin = lin;
+	}
+	else // 'V'
+	{
+		maxcol = col;
+		maxlin = lin + size;
+	}
+	
 	switch (direction) // o deslocamento na direcao
 	{
 		case 'N':
@@ -98,23 +111,27 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 	{
 		return false;
 	}
+	
+	position.col = col;
+	position.col = lin;
+	orientation = ori;
+
 	return true;
 }
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
-	/*unsigned int  move = rand() % 4;
-	switch (move)
-	{
-		case 0: // NO MOVE
-			return true;
-			break;
-		case 1:
-			
-		case 2:
-		case 3:
-		case 4:
-	}*/
-	return true;
+	unsigned int  move = rand() % 4;
+	unsigned int rota = rand() % 1; // true or false;
+	bool rotation = true;
+	if (rota == 0) rotation = false;
+
+	if (move == 1)	return Ship::move('N', rotation, lineMin, columnMax, lineMax, columnMax);
+	else if (move == 2)	return Ship::move('S', rotation, lineMin, columnMax, lineMax, columnMax);
+	else if (move == 3)	return Ship::move('E', rotation, lineMin, columnMax, lineMax, columnMax);
+	else if (move == 4)	return Ship::move('O', rotation, lineMin, columnMax, lineMax, columnMax);
+	else if (move == 0)	return true;
+
+	return false;
 }
 bool Ship::attack(size_t partNumber) //partNumber = {0,1,…, size-1}
 {

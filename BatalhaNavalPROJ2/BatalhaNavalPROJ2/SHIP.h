@@ -6,6 +6,7 @@
 #include <string>
 #include "TYPES.h"
 
+
 using namespace std;
 //=============================================================================
 class Ship
@@ -25,13 +26,15 @@ public:
 	void set_default_status();
 
 	//=============================================================================
-	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int
-		columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
+	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
+	// ^ é preciso pensar isto melhor^
 		bool moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 		lineMax, unsigned int columnMax); // moves the ship randomly
 	bool attack(size_t partNumber); //partNumber = {0,1,…, size-1}
 	bool isDestroyed() const; // checks whether the ship is destroyed
 	void show() const; // shows the attributes of the ship (for debugging)
+
+
 private:
 	char symbol; // 'P' = "porta-aviões"; 'F' = "fragata"; … (portuguese names)
 	PositionInt position; // coordinates of the upper left corner of the ship

@@ -123,6 +123,30 @@ void Board::set_default_status_all_ships()
 		ships[i].set_default_status();
 	}
 }
+bool Board::check_over_position_ship(Ship &ship)
+{
+	if (ship.get_ship_orientation() == 'H')
+	{
+		for (size_t i = 0; i < ship.get_ship_size(); i++)
+		{
+			if (board[ship.get_ship_position_lin()][ship.get_ship_position_col() + i] != -1)
+			{
+				return true;
+			}
+		}
+	}
+	else if (ship.get_ship_orientation() == 'V')
+	{
+		for (size_t i = 0; i < ship.get_ship_size(); i++)
+		{
+			if (board[ship.get_ship_position_lin()+ i][ship.get_ship_position_col()] != -1)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
 
 void Board::moveShips() // tries to randmonly move all the ships of the fleet
 {
