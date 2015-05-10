@@ -2,13 +2,6 @@
 #include "BOMB.h"
 #include "TYPES.h"
 
-// sets target position values
-void Bomb::setValues(char lin, char col)
-{
-	targetLine = lin;
-	targetColumn = col;
-}
-
 // returns target position, using the private values
 PositionChar Bomb::getTargetPosition() const 
 {
@@ -25,6 +18,9 @@ Bomb::Bomb(PositionChar targetPosition)
 	unsigned int offset = (rand() % 3); // generates 0, 1 or 2 randomly. 
 	unsigned int line = targetPosition.lin, column = targetPosition.col;
 
+	targetLine = line;
+	targetColumn = column;
+
 	// fazer condiçao de calhar fora do tabuleiro
 
 	if (offset == 0) // 1/3 chance
@@ -39,10 +35,14 @@ Bomb::Bomb(PositionChar targetPosition)
 		else if (direction == 3) // Oeste
 			column--;
 	}
-}
-/*
-void show() const
-{
 
+	actualLine = line; // stores final line
+	actualColumn = column; // stores final column
 }
-*/
+
+
+void Bomb::show() const
+{
+	cout << "Linha pretendida: " << targetLine << "\nLinha final: " << actualLine << endl;
+	cout << "Coluna pretendida: " << targetColumn << "\nColuna final: " << actualColumn << endl;
+}

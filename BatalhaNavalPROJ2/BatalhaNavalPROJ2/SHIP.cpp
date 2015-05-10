@@ -1,4 +1,4 @@
-#include "TYPES.h"
+	#include "TYPES.h"
 #include "SHIP.h"
 #include <iostream>
 #include "BOARD.h"
@@ -107,7 +107,7 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		}
 	}
 
-	if (lin < lineMin || maxlin >lineMax || col < columnMin || maxcol > columnMax) //verifica se sai fora do tabuleiro
+	if (lin < lineMin || maxlin > lineMax || col < columnMin || maxcol > columnMax) // verifica se sai fora do tabuleiro
 	{
 		return false;
 	}

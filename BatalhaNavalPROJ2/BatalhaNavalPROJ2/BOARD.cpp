@@ -31,6 +31,15 @@ void Board::place_all_the_ships()
 	}
 }
 
+int Board::getLines() const
+{
+	return numLines;
+}
+
+int Board::getColumns() const
+{
+	return numColumns;
+}
 
 Board::Board(const string &filename)
 {
@@ -46,12 +55,12 @@ Board::Board(const string &filename)
 		char type, orientation;
 		PositionChar position;
 		unsigned int color, syze;
-		ReadConfig >> type >> syze >> position.lin >> position.col >> orientation >> color;// obtem cas carateristicas do navio;
+		ReadConfig >> type >> syze >> position.lin >> position.col >> orientation >> color;// obtem as carateristicas do navio;
 		ships.push_back(Ship(type, position, orientation, syze, color)); // ATENCAO OPERACAO A VERIFICAR
 	}
 
 	ReadConfig.close();
-}
+} 
 void Board::remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation)
 {
 	if (orientation == 'H')
@@ -188,7 +197,8 @@ void Board::display() const // displays the colored board during the game
 			cout << ships[i].get_ship_status()[j];
 			}
 	}
-	gotoxy(numLines + 4, 0);
+	setcolor(LIGHTGRAY, BLACK);
+	gotoxy(0, numLines + 3);
 }
 void Board::show() const // falta navios e a info do tabuleiro;
 {

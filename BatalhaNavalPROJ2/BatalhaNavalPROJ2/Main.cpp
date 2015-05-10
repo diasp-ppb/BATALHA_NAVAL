@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <Windows.h>
+#include <ctime>
 
 using namespace std;
 
@@ -18,8 +19,10 @@ string Select_file()
 }
 
 void main()
-{   ////////////////////CONFIG TABULEIRO ///////////////////////////////////
-	Board TABU =  Board(Select_file());
+{
+	srand((unsigned int)time(NULL)); // nao alterar
+	////////////////////CONFIG TABULEIRO ///////////////////////////////////
+	Board TABU = Board(Select_file());
 	TABU.resize_board();
 	TABU.place_all_the_ships();
 	TABU.set_default_status_all_ships();
@@ -166,4 +169,11 @@ void main()
 	system("PAUSE");
 	system("cls");
 	TABU.display();
+	system("PAUSE");
+	system("cls");
+	PositionChar target;
+	target.lin = 'C';
+	target.col = 'd';
+	Bomb bomba = Bomb(target);
+	bomba.show();
 }
