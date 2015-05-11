@@ -23,6 +23,7 @@ public:
 	void place_all_the_ships(); // coloca na tabuleiro os navios pertencentes ao vector no tabuleiro  VER A QUESTAO DO VOID COM UM BOOL DENTRO
 	void set_default_status_all_ships();// coloca todos os navios com 100% de vida 
 	bool check_over_position_ship(Ship &ship);//ve se sobrepoe outro navio no tabuleiro.
+	bool allShipsDead(); // verifica se todos os navios estão "mortos"
 	int getLines() const; // acede ao numero de Linhas
 	int getColumns() const; // acede ao numero de Colunas
 	//=============================================================================

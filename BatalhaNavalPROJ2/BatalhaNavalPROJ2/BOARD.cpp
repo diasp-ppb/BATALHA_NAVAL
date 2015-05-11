@@ -41,6 +41,18 @@ int Board::getColumns() const
 	return numColumns;
 }
 
+bool Board::allShipsDead()
+{
+	bool dead = true;
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		if (!ships[i].isDestroyed())
+			dead = false;
+	}
+
+	return dead;
+}
+
 Board::Board(const string &filename)
 {
 

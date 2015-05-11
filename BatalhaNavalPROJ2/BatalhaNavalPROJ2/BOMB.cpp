@@ -12,6 +12,16 @@ PositionChar Bomb::getTargetPosition() const
 	return target;
 }
 
+// returns actual position, using the private values
+PositionChar Bomb::getActualPosition() const
+{
+	PositionChar actual;
+	actual.col = actualLine;
+	actual.lin = actualColumn;
+
+	return actual;
+}
+
 // Bomb Constructor
 Bomb::Bomb(PositionChar targetPosition)
 {
