@@ -53,6 +53,11 @@ bool Board::allShipsDead()
 	return dead;
 }
 
+Board::Board()
+{
+	numLines = 0;
+	numColumns = 0;
+}
 Board::Board(const string &filename)
 {
 

@@ -16,6 +16,8 @@ public:
 	void attackBoard(const Bomb &b); // "receives" a bomb from the opponent;
 	// updates own board taking into account the damages
 	// caused by the bomb; BEFORE THAT… moves the ships
+	char askCoord(); // asks coordinates and validates input
+	bool isContained(char value, int max); // checks if value is within the limits
 private:
 	string name; // name of the player
 	Board board; // board of the player

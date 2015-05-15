@@ -1,8 +1,11 @@
-
 #ifndef _TYPES
 #define _TYPES
 
-
+template <typename T>
+struct Position
+{
+	T lin, col;
+};
 
 //=============================================================================
 struct PositionChar // to store a board position in char format
