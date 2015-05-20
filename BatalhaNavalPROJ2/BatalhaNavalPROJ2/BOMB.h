@@ -9,9 +9,9 @@ using namespace std;
 class Bomb
 {
 public:
-	Bomb(PositionChar targetPosition);
-	PositionChar getTargetPosition() const;
-	PositionChar getActualPosition() const;
+	Bomb(Position<char> targetPosition);
+	Position<char> getTargetPosition() const;
+	Position<char> getActualPosition() const;
 	// OTHER METHODS, if necessary
 	// ...
 	void show() const; // shows the attributes of the bomb (for debugging)

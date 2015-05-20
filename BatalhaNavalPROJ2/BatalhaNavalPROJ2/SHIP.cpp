@@ -47,7 +47,7 @@ void Ship::set_default_status()
 }
 
 //=============================================================================
-Ship::Ship(char symbol, PositionChar position, char orientation, unsigned int size,	unsigned int color)
+Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size,	unsigned int color)
 {
 	this->symbol = symbol;
 	this->position.col = position.col - 97;

@@ -70,7 +70,7 @@ Board::Board(const string &filename)
 	while (!ReadConfig.eof()) // enquanto nao chega ao fim do ficheiro;
 	{
 		char type, orientation;
-		PositionChar position;
+		Position<char> position;
 		unsigned int color, syze;
 		ReadConfig >> type >> syze >> position.lin >> position.col >> orientation >> color;// obtem as carateristicas do navio;
 		ships.push_back(Ship(type, position, orientation, syze, color)); // ATENCAO OPERACAO A VERIFICAR

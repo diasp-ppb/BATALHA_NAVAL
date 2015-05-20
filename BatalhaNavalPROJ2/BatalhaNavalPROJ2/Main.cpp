@@ -171,7 +171,7 @@ void main()
 	TABU.display();
 	system("PAUSE");
 	system("cls");
-	PositionChar target;
+	Position<char> target;
 	target.lin = 'C';
 	target.col = 'd';
 	Bomb bomba = Bomb(target);

@@ -45,7 +45,7 @@ bool Player::isContained(char value, int max)
 Bomb Player::getBomb() 
 {
 	char lin, col;
-	PositionChar target;
+	Position<char> target;
 
 
 	cout << "Inctroduza as letras correspondentes as coordenadas do alvo: " << endl;
@@ -81,6 +81,6 @@ It may be necessary to use an auxiliary board to make a preview of the displacem
 
 void Player::attackBoard(const Bomb &b)
 {
-	PositionChar local = b.getActualPosition();
+	Position<char> local = b.getActualPosition();
 
 }

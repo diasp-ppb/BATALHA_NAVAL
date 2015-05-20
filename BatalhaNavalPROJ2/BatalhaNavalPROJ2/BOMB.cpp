@@ -3,9 +3,9 @@
 #include "TYPES.h"
 
 // returns target position, using the private values
-PositionChar Bomb::getTargetPosition() const 
+Position<char> Bomb::getTargetPosition() const 
 {
-	PositionChar target;
+	Position<char> target;
 	target.col = targetLine;
 	target.lin = targetColumn;
 
@@ -13,9 +13,9 @@ PositionChar Bomb::getTargetPosition() const
 }
 
 // returns actual position, using the private values
-PositionChar Bomb::getActualPosition() const
+Position<char> Bomb::getActualPosition() const
 {
-	PositionChar actual;
+	Position<char> actual;
 	actual.col = actualLine;
 	actual.lin = actualColumn;
 
@@ -23,7 +23,7 @@ PositionChar Bomb::getActualPosition() const
 }
 
 // Bomb Constructor
-Bomb::Bomb(PositionChar targetPosition)
+Bomb::Bomb(Position<char> targetPosition)
 {
 	unsigned int offset = (rand() % 3); // generates 0, 1 or 2 randomly. 
 	unsigned int line = targetPosition.lin, column = targetPosition.col;

@@ -12,7 +12,7 @@ using namespace std;
 class Ship
 {
 public:
-	Ship(char symbol, PositionChar position, char orientation, unsigned int size,
+	Ship(char symbol, Position<char> position, char orientation, unsigned int size,
 		unsigned int color);
 	//==========================FUNCOES ADICIONAIS ==========================
 
@@ -37,7 +37,7 @@ public:
 
 private:
 	char symbol; // 'P' = "porta-aviões"; 'F' = "fragata"; … (portuguese names)
-	PositionInt position; // coordinates of the upper left corner of the ship
+	Position<int> position; // coordinates of the upper left corner of the ship
 	char orientation; // 'H' = horizontal; 'V' = vertical
 	unsigned int size; // number os cells occupied by the ship, on the board
 	unsigned int color; // color code: o=BLACK, 1=BLUE, … (see annex of 1st proj.)
