@@ -17,7 +17,8 @@ public:
 	void show() const; // shows the attributes of the board (for debugging)
 
 	//==========================FUNCOES ADICIONAIS ==========================
-	int  get_board_position(unsigned int lin, unsigned int col);
+	Ship get_ship(size_t index) const;
+	int  get_board_position(unsigned int lin, unsigned int col) const;
 	void set_board_position(unsigned int lin, unsigned int col,int mark);
 	void resize_board();//redimensiona o tabuleiro 
 	void remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation);
@@ -27,6 +28,7 @@ public:
 	bool allShipsDead(); // verifica se todos os navios estão "mortos"
 	int getLines() const; // acede ao numero de Linhas
 	int getColumns() const; // acede ao numero de Colunas
+
 	//=============================================================================
 private:
 	int numLines, numColumns; // redundant info …

@@ -24,6 +24,7 @@ public:
 	unsigned int get_ship_color() const;
 	string get_ship_status() const;
 	void set_default_status();
+	
 
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
