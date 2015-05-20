@@ -50,7 +50,6 @@ Bomb::Bomb(Position<char> targetPosition)
 	actualColumn = column; // stores final column
 }
 
-
 void Bomb::show() const
 {
 	cout << "Linha pretendida: " << targetLine << "\nLinha final: " << actualLine << endl;

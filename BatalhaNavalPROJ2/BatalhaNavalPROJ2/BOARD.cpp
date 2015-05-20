@@ -9,10 +9,12 @@ int Board::get_board_position(unsigned int lin, unsigned int col)
 {
 	return board[lin][col];
 }
+
 void Board::set_board_position(unsigned int lin, unsigned int col, int mark)
 {
 	board[lin][col] = mark;
 }
+
 void Board::resize_board()
 {
 	board.resize(numLines); //nº de linhas
@@ -58,6 +60,7 @@ Board::Board()
 	numLines = 0;
 	numColumns = 0;
 }
+
 Board::Board(const string &filename)
 {
 
@@ -78,6 +81,7 @@ Board::Board(const string &filename)
 
 	ReadConfig.close();
 } 
+
 void Board::remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation)
 {
 	if (orientation == 'H')
@@ -94,12 +98,12 @@ void Board::remove_ship(unsigned int col, unsigned int lin, unsigned int size, c
 
 bool Board::putShip(const Ship &s) // adds ship to the board, if possible
 {   //verifica se esta dentro do tabuleiro
-	if (s.get_ship_position_col() < 0 ||
-		(int)s.get_ship_position_col() > numColumns - 1 ||
-		s.get_ship_position_lin() < 0 ||
-		(int)s.get_ship_position_col() > numLines - 1 ||
-		((int)(s.get_ship_position_col() + s.get_ship_size() - 1) >  numColumns && s.get_ship_orientation() == 'H') ||
-		((int)(s.get_ship_position_lin() + s.get_ship_size() - 1) > numLines && s.get_ship_orientation() == 'V'))
+	if (s.getShipPosition().col;() < 0 ||
+		(int)s.getShipPosition().col;() > numColumns - 1 ||
+		s.getShipPosition().lin;() < 0 ||
+		(int)s.getShipPosition().col;() > numLines - 1 ||
+		((int)(s.getShipPosition().col;() + s.get_ship_size() - 1) >  numColumns && s.get_ship_orientation() == 'H') ||
+		((int)(s.getShipPosition().lin;() + s.get_ship_size() - 1) > numLines && s.get_ship_orientation() == 'V'))
 	{
 		return false;
 	}
@@ -108,7 +112,7 @@ bool Board::putShip(const Ship &s) // adds ship to the board, if possible
 	{
 		for (size_t i = 0; i < (int)s.get_ship_size(); i++) // ve se  é tudo '-1'
 		{
-			if (get_board_position(s.get_ship_position_lin(), s.get_ship_position_col() + i) != -1)
+			if (get_board_position(s.getShipPosition().lin;(), s.getShipPosition().col;() + i) != -1)
 			{
 				return false;
 			}
@@ -117,7 +121,7 @@ bool Board::putShip(const Ship &s) // adds ship to the board, if possible
 	else // se for vertical
 		for (size_t i = 0; i < s.get_ship_size(); i++) // ve se  é tudo '-1'
 		{
-		if (get_board_position((s.get_ship_position_lin() + i), s.get_ship_position_col()) != -1)
+		if (get_board_position((s.getShipPosition().lin;() + i), s.getShipPosition().col;()) != -1)
 		{
 			return false;
 		}
@@ -127,18 +131,19 @@ bool Board::putShip(const Ship &s) // adds ship to the board, if possible
 	{
 		for (size_t i = 0; i < s.get_ship_size(); i++)
 		{
-			board[s.get_ship_position_lin()][s.get_ship_position_col() + i] = i;
+			board[s.getShipPosition().lin;()][s.getShipPosition().col;() + i] = i;
 		}
 	}
 	else
 	{
 		for (size_t i = 0; i < s.get_ship_size(); i++)
 		{
-			board[s.get_ship_position_lin() + i][s.get_ship_position_col()] = i;
+			board[s.getShipPosition().lin;() + i][s.getShipPosition().col;()] = i;
 		}
 	}
 	return true;
 }
+
 void Board::set_default_status_all_ships()
 {
 	for (size_t i = 0; i < ships.size(); i++)
@@ -146,13 +151,14 @@ void Board::set_default_status_all_ships()
 		ships[i].set_default_status();
 	}
 }
+
 bool Board::check_over_position_ship(Ship &ship)
 {
 	if (ship.get_ship_orientation() == 'H')
 	{
 		for (size_t i = 0; i < ship.get_ship_size(); i++)
 		{
-			if (board[ship.get_ship_position_lin()][ship.get_ship_position_col() + i] != -1)
+			if (board[ship.getShipPosition().lin;()][ship.getShipPosition().col;() + i] != -1)
 			{
 				return true;
 			}
@@ -162,7 +168,7 @@ bool Board::check_over_position_ship(Ship &ship)
 	{
 		for (size_t i = 0; i < ship.get_ship_size(); i++)
 		{
-			if (board[ship.get_ship_position_lin()+ i][ship.get_ship_position_col()] != -1)
+			if (board[ship.getShipPosition().lin;()+ i][ship.getShipPosition().col;()] != -1)
 			{
 				return true;
 			}
@@ -175,10 +181,35 @@ void Board::moveShips() // tries to randmonly move all the ships of the fleet
 {
 
 }
-bool Board::attack(const Bomb &b) // NOT DONE
+
+bool Board::attack(const Bomb &b) 
 {
-	return true;
+	bool kaboom = true;
+	Position<int> coordinates = b.getActualPosition();
+	coordinates.lin = (int)(coordinates.lin - 'A');
+	coordinates.col = (int)(coordinates.col - 'a');
+
+	size_t partNumber;
+	Ship barco = ships[board[coordinates.lin][coordinates.col]];
+
+	if (coordinates.lin > getLines() || coordinates.col > getColumns())
+		kaboom = false;
+	else if (board[coordinates.lin][coordinates.col] != -1)
+	{
+		if (!barco.isDestroyed())
+		{
+			if (barco.get_ship_orientation() = 'H')
+				partNumber = coordinates.col - barco.getShipPosition().col;
+			else
+				partNumber = coordinates.lin - barco.getShipPosition().lin;
+		}
+	}
+
+	barco.attack(partNumber);
+
+	return kaboom;
 }
+
 void Board::display() const // displays the colored board during the game  
 {
 	cout << "  "; // alinhas tabuleiro;
@@ -203,20 +234,21 @@ void Board::display() const // displays the colored board during the game
 			for (size_t j = 0; j < ships[i].get_ship_size(); j++)
 			{
 			setcolor(ships[i].get_ship_color(), LIGHTGRAY);
-			gotoxy(2 * (ships[i].get_ship_position_col() + 1 + j), ships[i].get_ship_position_lin() + 1);  //formula col = (Distancia á margem)+ 2*col
+			gotoxy(2 * (ships[i].getShipPosition().col;() + 1 + j), ships[i].getShipPosition().lin;() + 1);  //formula col = (Distancia á margem)+ 2*col
 			cout << ships[i].get_ship_status()[j];
 			}
 		else
 			for (size_t j = 0; j < ships[i].get_ship_size(); j++)
 			{
 			setcolor(ships[i].get_ship_color(), LIGHTGRAY);
-			gotoxy(ships[i].get_ship_position_col() + 3,ships[i].get_ship_position_lin() + 1 + j );// formula lin= distancia ao topo + 1 + lin
+			gotoxy(ships[i].getShipPosition().col;() + 3,ships[i].getShipPosition().lin;() + 1 + j );// formula lin= distancia ao topo + 1 + lin
 			cout << ships[i].get_ship_status()[j];
 			}
 	}
 	setcolor(LIGHTGRAY, BLACK);
 	gotoxy(0, numLines + 3);
 }
+
 void Board::show() const // falta navios e a info do tabuleiro;
 {
 	cout << "COL: " << numColumns << "\nLIN: " << numLines;

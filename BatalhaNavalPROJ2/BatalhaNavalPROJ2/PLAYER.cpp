@@ -11,6 +11,14 @@ Player::Player(string playerName, string boardFilename)
 	board = Board(boardFilename);
 }
 
+bool Player::isDead()
+{
+	status = false;
+	if (board.allShipsDead())
+		status = true;
+
+	return status;
+}
 
 char Player::askCoord()
 {
@@ -81,6 +89,6 @@ It may be necessary to use an auxiliary board to make a preview of the displacem
 
 void Player::attackBoard(const Bomb &b)
 {
-	Position<char> local = b.getActualPosition();
-
+	board.moveShips();
+	board.attack(b);
 }

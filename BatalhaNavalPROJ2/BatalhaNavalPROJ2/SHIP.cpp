@@ -10,30 +10,32 @@ char Ship::get_ship_symbol()
 {
 	return symbol;
 }
-unsigned int Ship::get_ship_position_col() const
+
+Position<int> Ship::getShipPosition() const
 {
-	return position.col;
+	return position;
 }
-unsigned int Ship::get_ship_position_lin() const
-{
-	return position.lin;
-}
+
 char  Ship::get_ship_orientation() const
 {
 	return orientation;
 }
+
 unsigned int  Ship::get_ship_size() const
 {
 	return size;
 }
+
 unsigned int  Ship::get_ship_color() const
 {
 	return color;
 }
+
 string Ship::get_ship_status() const
 {
 	return status;
 }
+
 void Ship::set_default_status()
 {
 	string a;
@@ -118,6 +120,7 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 
 	return true;
 }
+
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
 	unsigned int  move = rand() % 5;
@@ -133,17 +136,18 @@ bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int l
 
 	return false;
 }
+
 bool Ship::attack(size_t partNumber) //partNumber = {0,1,…, size-1}
 {
-	
 	if (partNumber < size)
 	{
 		status[partNumber] = tolower(symbol);
 		return true;
 	}
-	
+	else
 	return false;
 }
+
 bool Ship::isDestroyed() const // checks whether the ship is destroyed
 {
 	bool valid = false;
@@ -157,6 +161,7 @@ bool Ship::isDestroyed() const // checks whether the ship is destroyed
 		valid = true;
 	return valid;
 }
+
 void Ship::show() const // shows the attributes of the ship (for debugging)
 {
 	cout << "Ship size: " << size << "\n Orientation: " << orientation << "\n Ship color: " << color << "\n Ship Status: " << status << "\n Ship Position: " << position.lin << position.col << endl;

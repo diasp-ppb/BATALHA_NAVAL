@@ -18,9 +18,11 @@ public:
 	// caused by the bomb; BEFORE THAT… moves the ships
 	char askCoord(); // asks coordinates and validates input
 	bool isContained(char value, int max); // checks if value is within the limits
+	bool isDead(); // checks if player is dead
 private:
 	string name; // name of the player
 	Board board; // board of the player
+	bool status; // player status
 };
 
 #endif
