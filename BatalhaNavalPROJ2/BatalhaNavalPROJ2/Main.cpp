@@ -1,3 +1,4 @@
+#include "COLOR_MOD.h"
 #include "BOARD.h"
 #include "PLAYER.h"
 #include "BOARD.h"
@@ -9,6 +10,7 @@
 #include <fstream>
 #include <iomanip>
 
+
 using namespace std;
 
 void print_boards(Player &UM, Player &DOIS);
@@ -16,29 +18,28 @@ void player_turn(Player &UM, Player &DOIS);
 void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
-	Position<char> pos; pos.col = 1; pos.lin = 1;
-	Ship navio = Ship('P', pos, 'H', 2, 2, 2);
-	navio.set_default_status();
-	navio.attack(1);
-	cout << navio.get_ship_status();
-	Position<char> pos2; pos2.col = 65; pos2.lin = 100;
-	Bomb a = Bomb(pos2);
-	a.show();
-
+	
+	
 
 	Player UM = Player(1);
 	Player DOIS = Player(2);
 	
 	do
 	{
+		system("cls");
 		print_boards(UM, DOIS);
 		player_turn(UM, DOIS); // turno PL 1
 
 		if (DOIS.Player_DEAD() == true) break;
-		print_boards(UM, DOIS);
-	
-		system("pause");
-		player_turn(DOIS,UM);// tunro PL 2
+		gotoxy(0, 4 + UM.get_board().getLines());
+		
+		
+		player_turn(DOIS,UM);// turno PL 2
+
+		gotoxy(0, 0);
+		UM.showBoard();
+		gotoxy(0, 8 + UM.get_board().getLines());
+		
 
 		if (UM.Player_DEAD() == true) break;
 		print_boards(UM, DOIS);
@@ -189,7 +190,7 @@ void main()
 
 void print_boards(Player &UM, Player &DOIS)
 {
-	system("CLS");
+	gotoxy(0, 0);
 	cout << setw(15) << UM.get_player_name() << endl;
 	UM.showBoard();
 	cout << endl;
@@ -199,6 +200,6 @@ void print_boards(Player &UM, Player &DOIS)
 }
 void player_turn(Player &UM, Player &DOIS)
 {
-	cout << UM.get_player_name() << endl;
+	cout << "Jogador: " << UM.get_player_name() << endl;
 	DOIS.attackBoard(UM.getBomb());
 }

@@ -201,9 +201,19 @@ bool Board::attack(const Bomb &b) // NOT DONE
 		{
 			cout << "Hit!" << endl;
 			if (ships[posicao].get_ship_orientation() == 'H')
-				ships[posicao].attack(b.getActualPosition().col - ships[posicao].get_ship_position_col());
+				ships[posicao].attack(coluna - ships[posicao].get_ship_position_col());
 			else
 				ships[posicao].attack(linha - ships[posicao].get_ship_position_lin());
+			if (ships[posicao].isDestroyed() == true)
+			{	
+				cout << "O navio ";
+				for (size_t i = 0; i < ships[posicao].get_ship_size(); i++)
+				{
+					cout << ships[posicao].get_ship_symbol();
+				}
+				cout << " afundou!!" << endl;
+				remove_ship(ships[posicao].get_ship_position_col(), ships[posicao].get_ship_position_lin(), ships[posicao].get_ship_size(), ships[posicao].get_ship_orientation());
+			}
 		}
 		return true;
 	}

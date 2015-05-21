@@ -139,3 +139,8 @@ string Player::get_player_name() const
 {
 	return name;
 }
+
+Board Player::get_board() const
+{
+	return board;
+}

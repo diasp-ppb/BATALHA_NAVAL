@@ -20,6 +20,7 @@ public:
 	char askCoord(); // asks coordinates and validates input
 	bool isContained(char value, int max); // checks if value is within the limits
 	bool Player_DEAD() const;
+	Board get_board() const;
 	string get_player_name() const;
 private:
 	string name; // name of the player

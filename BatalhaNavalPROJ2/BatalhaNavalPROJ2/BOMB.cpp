@@ -25,7 +25,7 @@ Position<char> Bomb::getActualPosition() const
 // Bomb Constructor
 Bomb::Bomb(Position<char> targetPosition)
 {
-	unsigned int offset = (rand() % 3); // generates 0, 1 or 2 randomly. 
+	unsigned int offset = (rand() % 100); // generates 0, 1 or 2 randomly. 
 	unsigned int line = targetPosition.lin, column = targetPosition.col;
 
 	targetLine = line;
@@ -33,7 +33,7 @@ Bomb::Bomb(Position<char> targetPosition)
 
 	// fazer condiçao de calhar fora do tabuleiro
 
-	if (offset == 0) // 1/3 chance
+	if (offset == 0 ) // 1/3 chance
 	{
 		unsigned int direction = (rand() % 4); // generates direction of offset
 		if (direction == 0) // Norte
