@@ -6,26 +6,44 @@
 #include <iostream>
 #include <Windows.h>
 #include <ctime>
+#include <fstream>
+#include <iomanip>
 
 using namespace std;
 
-string Select_file()
-{
-	cout << "Qual e o ficheiro de configuracao? ";
-	string File_name;
-	cin >> File_name;
-	return File_name;
-
-}
-
+void print_boards(Player &UM, Player &DOIS);
+void player_turn(Player &UM, Player &DOIS);
 void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
-	////////////////////CONFIG TABULEIRO ///////////////////////////////////
-	Board TABU = Board(Select_file());
-	TABU.resize_board();
-	TABU.place_all_the_ships();
-	TABU.set_default_status_all_ships();
+	Position<char> pos; pos.col = 1; pos.lin = 1;
+	Ship navio = Ship('P', pos, 'H', 2, 2, 2);
+	navio.set_default_status();
+	navio.attack(1);
+	cout << navio.get_ship_status();
+	Position<char> pos2; pos2.col = 65; pos2.lin = 100;
+	Bomb a = Bomb(pos2);
+	a.show();
+
+
+	Player UM = Player(1);
+	Player DOIS = Player(2);
+	
+	do
+	{
+		print_boards(UM, DOIS);
+		player_turn(UM, DOIS); // turno PL 1
+
+		if (DOIS.Player_DEAD() == true) break;
+		print_boards(UM, DOIS);
+	
+		system("pause");
+		player_turn(DOIS,UM);// tunro PL 2
+
+		if (UM.Player_DEAD() == true) break;
+		print_boards(UM, DOIS);
+	} while (UM.Player_DEAD() != true || DOIS.Player_DEAD() != true);
+	
 	///////////////////////////////////////////////////////////////////////
 	/*
 	Beep(330, 100); Sleep(100);
@@ -165,15 +183,22 @@ void main()
 	Beep(932, 100); Sleep(125);
 	Beep(1046, 675);*/
 	/////////////////////////////////////////////////////////////////////// 
-	TABU.show();
-	system("PAUSE");
-	system("cls");
-	TABU.display();
-	system("PAUSE");
-	system("cls");
-	Position<char> target;
-	target.lin = 'C';
-	target.col = 'd';
-	Bomb bomba = Bomb(target);
-	bomba.show();
+	
+}
+
+
+void print_boards(Player &UM, Player &DOIS)
+{
+	system("CLS");
+	cout << setw(15) << UM.get_player_name() << endl;
+	UM.showBoard();
+	cout << endl;
+	cout << endl;
+	cout << setw(15) << DOIS.get_player_name() << endl;
+	DOIS.showBoard();
+}
+void player_turn(Player &UM, Player &DOIS)
+{
+	cout << UM.get_player_name() << endl;
+	DOIS.attackBoard(UM.getBomb());
 }

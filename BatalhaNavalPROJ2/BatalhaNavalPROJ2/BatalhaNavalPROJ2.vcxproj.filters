@@ -70,5 +70,8 @@
     <ClInclude Include="COLOR_MOD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SCOREBOARD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

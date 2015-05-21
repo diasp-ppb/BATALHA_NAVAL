@@ -5,7 +5,11 @@
 #include <iomanip>
 #include "COLOR_MOD.h"
 
-int Board::get_board_position(unsigned int lin, unsigned int col)
+Ship Board::return_ship(size_t index) const
+{
+	return ships[index];
+}
+int Board::get_board_position(unsigned int lin, unsigned int col) const
 {
 	return board[lin][col];
 }
@@ -21,7 +25,6 @@ void Board::resize_board()
 		board[i].resize(numLines, -1);
 	}
 }
-
 void Board::place_all_the_ships()
 {
 
@@ -41,13 +44,15 @@ int Board::getColumns() const
 	return numColumns;
 }
 
-bool Board::allShipsDead()
+bool Board::allShipsDead() const
 {
 	bool dead = true;
 	for (size_t i = 0; i < ships.size(); i++)
 	{
 		if (!ships[i].isDestroyed())
+		{
 			dead = false;
+		}
 	}
 
 	return dead;
@@ -66,18 +71,23 @@ Board::Board(const string &filename)
 	char absorv; // elemento absorvente;
 	ReadConfig >> numLines >> absorv >> numColumns;
 
-
+	size_t i = 0;
 	while (!ReadConfig.eof()) // enquanto nao chega ao fim do ficheiro;
 	{
 		char type, orientation;
 		Position<char> position;
 		unsigned int color, syze;
 		ReadConfig >> type >> syze >> position.lin >> position.col >> orientation >> color;// obtem as carateristicas do navio;
-		ships.push_back(Ship(type, position, orientation, syze, color)); // ATENCAO OPERACAO A VERIFICAR
+		ships.push_back(Ship(type, position, orientation, syze, color,i)); // ATENCAO OPERACAO A VERIFICAR
+		i++;
 	}
 
 	ReadConfig.close();
-} 
+
+	resize_board();
+	place_all_the_ships();
+	set_default_status_all_ships();
+}
 void Board::remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation)
 {
 	if (orientation == 'H')
@@ -127,14 +137,14 @@ bool Board::putShip(const Ship &s) // adds ship to the board, if possible
 	{
 		for (size_t i = 0; i < s.get_ship_size(); i++)
 		{
-			board[s.get_ship_position_lin()][s.get_ship_position_col() + i] = i;
+			board[s.get_ship_position_lin()][s.get_ship_position_col() + i] = s.get_ship_pos();
 		}
 	}
 	else
 	{
 		for (size_t i = 0; i < s.get_ship_size(); i++)
 		{
-			board[s.get_ship_position_lin() + i][s.get_ship_position_col()] = i;
+			board[s.get_ship_position_lin() + i][s.get_ship_position_col()] = s.get_ship_pos();
 		}
 	}
 	return true;
@@ -162,7 +172,7 @@ bool Board::check_over_position_ship(Ship &ship)
 	{
 		for (size_t i = 0; i < ship.get_ship_size(); i++)
 		{
-			if (board[ship.get_ship_position_lin()+ i][ship.get_ship_position_col()] != -1)
+			if (board[ship.get_ship_position_lin() + i][ship.get_ship_position_col()] != -1)
 			{
 				return true;
 			}
@@ -173,11 +183,31 @@ bool Board::check_over_position_ship(Ship &ship)
 
 void Board::moveShips() // tries to randmonly move all the ships of the fleet
 {
-
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		ships[i].moveRand(0,0, numLines, numColumns);
+	}
 }
 bool Board::attack(const Bomb &b) // NOT DONE
 {
-	return true;
+	int linha = b.getActualPosition().lin - 65;
+	int coluna = b.getActualPosition().col - 97;
+	// ve a posicao do tabu
+	if (linha >= 0 && linha < numLines &&
+		coluna >= 0 &&coluna < numColumns)
+	{
+		int posicao = board[linha][coluna];
+		if (posicao != -1)	
+		{
+			cout << "Hit!" << endl;
+			if (ships[posicao].get_ship_orientation() == 'H')
+				ships[posicao].attack(b.getActualPosition().col - ships[posicao].get_ship_position_col());
+			else
+				ships[posicao].attack(linha - ships[posicao].get_ship_position_lin());
+		}
+		return true;
+	}
+	return false;
 }
 void Board::display() const // displays the colored board during the game  
 {
@@ -210,7 +240,7 @@ void Board::display() const // displays the colored board during the game
 			for (size_t j = 0; j < ships[i].get_ship_size(); j++)
 			{
 			setcolor(ships[i].get_ship_color(), LIGHTGRAY);
-			gotoxy(ships[i].get_ship_position_col() + 3,ships[i].get_ship_position_lin() + 1 + j );// formula lin= distancia ao topo + 1 + lin
+			gotoxy(ships[i].get_ship_position_col() + 3, ships[i].get_ship_position_lin() + 1 + j);// formula lin= distancia ao topo + 1 + lin
 			cout << ships[i].get_ship_status()[j];
 			}
 	}
@@ -230,4 +260,42 @@ void Board::show() const // falta navios e a info do tabuleiro;
 		cout << '\n';
 	}
 	cout << '\n' << ships.size() << endl;
+}
+
+ostream& operator<<(ostream& os, const Board& board)
+{
+	os << "   "; // alinhas tabuleiro;
+	setcolor(LIGHTGRAY, BLACK);
+	for (int i = 0; i < board.getColumns(); i++)
+		os << static_cast <char> (97 + i) << " ";
+		os << endl;
+	for (int i = 0; i < board.getLines(); i++)//linhas
+	{
+		setcolor(LIGHTGRAY, BLACK);
+		os << static_cast<char> (65 + i) << " ";
+		for (int j = 0; j < board.getColumns(); j++) // colunas
+		{
+			int posicao = board.get_board_position(i, j);
+			if (posicao == -1)
+			{
+				setcolor(BLUE, LIGHTGRAY);
+				os << " .";
+			}
+			else
+			{
+				setcolor(board.return_ship(posicao).get_ship_color(), LIGHTGRAY);
+				if (board.return_ship(posicao).get_ship_orientation() == 'H')
+				{
+					os << setw(2) << board.return_ship(posicao).get_ship_partition(j - board.return_ship(posicao).get_ship_position_col());
+				}
+				else
+				{	
+					os << setw(2) << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).get_ship_position_lin());
+				}
+			}		
+		}
+		os << endl;
+	}
+	setcolor(WHITE, BLACK);
+	return os;
 }

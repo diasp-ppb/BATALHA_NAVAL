@@ -6,6 +6,7 @@
 
 
 //==========================FUNCOES ADICIONAIS ==========================
+
 char Ship::get_ship_symbol()
 {
 	return symbol;
@@ -46,8 +47,17 @@ void Ship::set_default_status()
 
 }
 
+char Ship::get_ship_partition(size_t index) const
+{
+	return status.at(index);
+}
+
+size_t Ship::get_ship_pos() const
+{
+	return pos;
+}
 //=============================================================================
-Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size,	unsigned int color)
+Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size,	unsigned int color,size_t pos)
 {
 	this->symbol = symbol;
 	this->position.col = position.col - 97;
@@ -55,6 +65,7 @@ Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int 
 	this->orientation = orientation;
 	this->size = size;
 	this->color = color;
+	this->pos = pos;
 }
 
 bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax)// moves the boat 
@@ -107,7 +118,7 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		}
 	}
 
-	if (lin < lineMin || maxlin > lineMax || col < columnMin || maxcol > columnMax) // verifica se sai fora do tabuleiro
+	if (lin < lineMin || maxlin >= lineMax || col < columnMin || maxcol >= columnMax) // verifica se sai fora do tabuleiro
 	{
 		return false;
 	}

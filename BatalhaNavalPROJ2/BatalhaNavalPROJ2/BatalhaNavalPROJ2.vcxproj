@@ -89,6 +89,7 @@
     <ClInclude Include="BOMB.h" />
     <ClInclude Include="BOARD.h" />
     <ClInclude Include="COLOR_MOD.h" />
+    <ClInclude Include="SCOREBOARD.h" />
     <ClInclude Include="TYPES.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="SHIP.h" />

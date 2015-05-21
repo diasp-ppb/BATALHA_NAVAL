@@ -17,18 +17,22 @@ public:
 	void show() const; // shows the attributes of the board (for debugging)
 
 	//==========================FUNCOES ADICIONAIS ==========================
-	int  get_board_position(unsigned int lin, unsigned int col);
+	int  get_board_position(unsigned int lin, unsigned int col) const;
 	void set_board_position(unsigned int lin, unsigned int col,int mark);
 	void resize_board();//redimensiona o tabuleiro 
 	void remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation);
 	void place_all_the_ships(); // coloca na tabuleiro os navios pertencentes ao vector no tabuleiro  VER A QUESTAO DO VOID COM UM BOOL DENTRO
 	void set_default_status_all_ships();// coloca todos os navios com 100% de vida 
 	bool check_over_position_ship(Ship &ship);//ve se sobrepoe outro navio no tabuleiro.
-	bool allShipsDead(); // verifica se todos os navios estão "mortos"
+	bool allShipsDead() const; // verifica se todos os navios estão "mortos"
 	int getLines() const; // acede ao numero de Linhas
 	int getColumns() const; // acede ao numero de Colunas
+	Ship return_ship(size_t index) const;
+	
+	friend ostream& operator<<(ostream& os, const Board& board);
 	//=============================================================================
 private:
+	
 	int numLines, numColumns; // redundant info …
 	vector<Ship> ships; // ships that are placed on the board
 	vector<vector<int>> board; // each element indicates

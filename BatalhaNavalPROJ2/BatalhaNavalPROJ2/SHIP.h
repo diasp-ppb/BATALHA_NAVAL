@@ -13,7 +13,7 @@ class Ship
 {
 public:
 	Ship(char symbol, Position<char> position, char orientation, unsigned int size,
-		unsigned int color);
+		unsigned int color,size_t pos);
 	//==========================FUNCOES ADICIONAIS ==========================
 
 	char get_ship_symbol();
@@ -23,8 +23,9 @@ public:
 	unsigned int get_ship_size() const;
 	unsigned int get_ship_color() const;
 	string get_ship_status() const;
+	char get_ship_partition(size_t index) const;
 	void set_default_status();
-
+	size_t get_ship_pos() const;
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
 	// ^ é preciso pensar isto melhor^
@@ -36,6 +37,7 @@ public:
 
 
 private:
+	size_t pos; // indice do barco
 	char symbol; // 'P' = "porta-aviões"; 'F' = "fragata"; … (portuguese names)
 	Position<int> position; // coordinates of the upper left corner of the ship
 	char orientation; // 'H' = horizontal; 'V' = vertical

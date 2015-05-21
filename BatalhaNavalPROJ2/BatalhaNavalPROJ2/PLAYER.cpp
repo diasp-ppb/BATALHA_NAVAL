@@ -4,11 +4,53 @@
 #include "BOMB.h"
 #include "BOARD.h"
 #include "TYPES.h"
+#include <fstream>
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool checkExistence(std::string filename)
+{
+	ifstream f;
+	f.open(filename);
+
+	return f.is_open();
+}
+
+string Select_file()
+{
+	string a;
+
+	bool invalido = false;
+
+	do
+	{
+		if (invalido)
+		{
+			invalido = false;
+			cout << "O ficheiro pretendido nao existe. Introduza novamente:" << endl;
+			cin.clear();
+		}
+		cout << "Nome do ficheiro de configuracao (incluindo extensao): ";
+		cin >> a;
+		if (cin.eof())
+			exit(1);
+		if (!checkExistence(a))
+			invalido = true;
+	} while (cin.fail() || invalido); // realiza o ciclo enquanto o ficheiro introduzido não for válido ou não existir;
+	return a;
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Player::Player(string playerName, string boardFilename)
 {
 	name = playerName;
 	board = Board(boardFilename);
+}
+
+Player::Player(size_t i)
+{	
+	cout << "Qual o nome do player " << i << "? ";
+	cin >> name;
+	board = Board(Select_file());
 }
 
 
@@ -81,6 +123,19 @@ It may be necessary to use an auxiliary board to make a preview of the displacem
 
 void Player::attackBoard(const Bomb &b)
 {
-	Position<char> local = b.getActualPosition();
+	board.attack(b);
+}
 
+void Player::showBoard() const
+{
+	cout << board;
+}
+
+bool Player::Player_DEAD() const
+{
+	return board.allShipsDead();
+}
+string Player::get_player_name() const
+{
+	return name;
 }

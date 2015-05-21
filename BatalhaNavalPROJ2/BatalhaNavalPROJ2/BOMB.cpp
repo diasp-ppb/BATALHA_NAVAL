@@ -16,8 +16,8 @@ Position<char> Bomb::getTargetPosition() const
 Position<char> Bomb::getActualPosition() const
 {
 	Position<char> actual;
-	actual.col = actualLine;
-	actual.lin = actualColumn;
+	actual.col = actualColumn;
+	actual.lin = actualLine;
 
 	return actual;
 }
