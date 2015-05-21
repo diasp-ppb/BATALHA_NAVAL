@@ -19,8 +19,6 @@ void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
 	
-	
-
 	Player UM = Player(1);
 	Player DOIS = Player(2);
 	
@@ -31,16 +29,16 @@ void main()
 		player_turn(UM, DOIS); // turno PL 1
 
 		if (DOIS.Player_DEAD() == true) break;
-		gotoxy(0, 4 + UM.get_board().getLines());
-		
-		
-		player_turn(DOIS,UM);// turno PL 2
 
-		gotoxy(0, 0);
-		UM.showBoard();
-		gotoxy(0, 8 + UM.get_board().getLines());
-		
+		// gotoxy(0, 4 + UM.get_board().getLines());
+		system("cls");
+		print_boards(UM, DOIS);
+		player_turn(DOIS,UM); // turno PL 2
 
+		//gotoxy(0, 0);
+		//UM.showBoard();
+		//gotoxy(0, 8 + UM.get_board().getLines());
+		
 		if (UM.Player_DEAD() == true) break;
 		print_boards(UM, DOIS);
 	} while (UM.Player_DEAD() != true || DOIS.Player_DEAD() != true);

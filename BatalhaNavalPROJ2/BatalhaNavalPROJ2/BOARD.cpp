@@ -78,7 +78,7 @@ Board::Board(const string &filename)
 		Position<char> position;
 		unsigned int color, syze;
 		ReadConfig >> type >> syze >> position.lin >> position.col >> orientation >> color;// obtem as carateristicas do navio;
-		ships.push_back(Ship(type, position, orientation, syze, color,i)); // ATENCAO OPERACAO A VERIFICAR
+		ships.push_back(Ship(type, position, orientation, syze, color, i)); // ATENCAO OPERACAO A VERIFICAR
 		i++;
 	}
 
@@ -185,19 +185,24 @@ void Board::moveShips() // tries to randmonly move all the ships of the fleet
 {
 	for (size_t i = 0; i < ships.size(); i++)
 	{
-		ships[i].moveRand(0,0, numLines, numColumns);
+		remove_ship(ships[i].get_ship_position_col(), ships[i].get_ship_position_lin(), ships[i].get_ship_size(), ships[i].get_ship_orientation());
+		ships[i].moveRand(0, 0, numLines, numColumns);
+		putShip(ships[i]);
 	}
 }
 bool Board::attack(const Bomb &b) // NOT DONE
 {
+	bool valid;
 	int linha = b.getActualPosition().lin - 65;
 	int coluna = b.getActualPosition().col - 97;
 	// ve a posicao do tabu
 	if (linha >= 0 && linha < numLines &&
-		coluna >= 0 &&coluna < numColumns)
+		coluna >= 0 && coluna < numColumns)
 	{
 		int posicao = board[linha][coluna];
-		if (posicao != -1)	
+		if (posicao == -1 || ships[posicao].isDestroyed() == true)
+			cout << "Miss!" << endl;
+		else
 		{
 			cout << "Hit!" << endl;
 			if (ships[posicao].get_ship_orientation() == 'H')
@@ -205,7 +210,7 @@ bool Board::attack(const Bomb &b) // NOT DONE
 			else
 				ships[posicao].attack(linha - ships[posicao].get_ship_position_lin());
 			if (ships[posicao].isDestroyed() == true)
-			{	
+			{
 				cout << "O navio ";
 				for (size_t i = 0; i < ships[posicao].get_ship_size(); i++)
 				{
@@ -215,9 +220,11 @@ bool Board::attack(const Bomb &b) // NOT DONE
 				remove_ship(ships[posicao].get_ship_position_col(), ships[posicao].get_ship_position_lin(), ships[posicao].get_ship_size(), ships[posicao].get_ship_orientation());
 			}
 		}
-		return true;
+		valid = true;
 	}
-	return false;
+	valid = false;
+	system("pause");
+	return valid;
 }
 void Board::display() const // displays the colored board during the game  
 {
@@ -278,7 +285,7 @@ ostream& operator<<(ostream& os, const Board& board)
 	setcolor(LIGHTGRAY, BLACK);
 	for (int i = 0; i < board.getColumns(); i++)
 		os << static_cast <char> (97 + i) << " ";
-		os << endl;
+	os << endl;
 	for (int i = 0; i < board.getLines(); i++)//linhas
 	{
 		setcolor(LIGHTGRAY, BLACK);
@@ -299,10 +306,10 @@ ostream& operator<<(ostream& os, const Board& board)
 					os << setw(2) << board.return_ship(posicao).get_ship_partition(j - board.return_ship(posicao).get_ship_position_col());
 				}
 				else
-				{	
+				{
 					os << setw(2) << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).get_ship_position_lin());
 				}
-			}		
+			}
 		}
 		os << endl;
 	}

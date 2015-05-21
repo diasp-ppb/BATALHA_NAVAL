@@ -30,7 +30,7 @@ string Select_file()
 			cin.clear();
 		}
 		cout << "Nome do ficheiro de configuracao (incluindo extensao): ";
-		cin >> a;
+		getline(cin, a);
 		if (cin.eof())
 			exit(1);
 		if (!checkExistence(a))
@@ -49,7 +49,7 @@ Player::Player(string playerName, string boardFilename)
 Player::Player(size_t i)
 {	
 	cout << "Qual o nome do player " << i << "? ";
-	cin >> name;
+	getline(cin, name);
 	board = Board(Select_file());
 }
 
@@ -89,20 +89,19 @@ Bomb Player::getBomb()
 	char lin, col;
 	Position<char> target;
 
-
-	cout << "Inctroduza as letras correspondentes as coordenadas do alvo: " << endl;
+	cout << "Introduza as letras correspondentes as coordenadas do alvo: " << endl;
 	cout << "Linha: ";
 	lin = askCoord();
 	while (!isContained(lin - 65, board.getLines()))
 	{
-		cout << "A linha introduzida não está contida no tabuleiro.\n" << "Linha: ";
+		cout << "A linha introduzida nao esta contida no tabuleiro.\n" << "Linha: ";
 		lin = askCoord();
 	}
 	cout << "Coluna: ";
 	col = askCoord();
 	while (!isContained(col - 97, board.getColumns()))
 	{
-		cout << "A coluna introduzida não está contida no tabuleiro.\n" << "Coluna: ";
+		cout << "A coluna introduzida nao esta contida no tabuleiro.\n" << "Coluna: ";
 		col = askCoord();
 	}
 
@@ -123,6 +122,7 @@ It may be necessary to use an auxiliary board to make a preview of the displacem
 
 void Player::attackBoard(const Bomb &b)
 {
+	board.moveShips();
 	board.attack(b);
 }
 

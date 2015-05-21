@@ -131,8 +131,8 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 }
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
-	unsigned int  move = rand() % 5;
-	unsigned int rota = rand() % 2; // true or false;
+	unsigned int  move = rand() % 4;
+	unsigned int rota = rand() % 1; // true or false;
 	bool rotation = true;
 	if (rota == 0) rotation = false;
 
