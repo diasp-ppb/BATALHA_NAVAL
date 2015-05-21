@@ -5,11 +5,7 @@
 #include <iomanip>
 #include "COLOR_MOD.h"
 
-Ship Board::get_ship(size_t index) const
-{
-	return ships[index];
-}
-int Board::get_board_position(unsigned int lin, unsigned int col) const
+int Board::get_board_position(unsigned int lin, unsigned int col)
 {
 	return board[lin][col];
 }
@@ -177,10 +173,7 @@ bool Board::check_over_position_ship(Ship &ship)
 
 void Board::moveShips() // tries to randmonly move all the ships of the fleet
 {
-	for (size_t i = 0; i < ships.size(); i++)
-	{
-		ships[i].moveRand(0, 0, numLines, numColumns);
-	}
+
 }
 bool Board::attack(const Bomb &b) // NOT DONE
 {
@@ -224,8 +217,6 @@ void Board::display() const // displays the colored board during the game
 	setcolor(LIGHTGRAY, BLACK);
 	gotoxy(0, numLines + 3);
 }
-
-
 void Board::show() const // falta navios e a info do tabuleiro;
 {
 	cout << "COL: " << numColumns << "\nLIN: " << numLines;
@@ -239,35 +230,4 @@ void Board::show() const // falta navios e a info do tabuleiro;
 		cout << '\n';
 	}
 	cout << '\n' << ships.size() << endl;
-}
-
-ostream& operator<<(ostream& os, const Board& board)
-{
-	os <<  "  "; // alinhas tabuleiro;
-	setcolor(LIGHTGRAY, BLACK);
-	for (int i = 0; i < board.getColumns(); i++)
-		os << static_cast <char> (97 + i) << " " << endl;
-	for (int i = 0; i < board.getLines(); i++)//linhas
-	{
-		setcolor(LIGHTGRAY, BLACK);
-		os << static_cast<char> (65 + i) << " ";
-		for (int j = 0; j < board.getColumns(); j++) // colunas
-		{	setcolor(BLUE, LIGHTGRAY);
-			if (board.get_board_position(j, i) == '-1')
-			{
-				os << ' .';
-			}
-			else 
-			{
-				setcolor(board.get_ship(board.get_board_position(j, i)).get_ship_color(), LIGHTGRAY);
-				//calculo da posicao atual na status
-				if (board.get_ship[board.get_board_position(j, i)].get_ship_oritentation() == 'H')
-				os << setw(2) << board.get_ship[board.get_board_position(j, i)].get_ship_status()[j - board.get_ship[board.get_board_position(j, i)].get_position_lin()];
-				
-				if (board.get_ship[board.get_board_position(j, i)].get_ship_oritentation() == 'V')
-				os << setw(2) << board.get_ship[board.get_board_position(j, i)].get_ship_status()[j - board.get_ship[board.get_board_position(j, i)].get_position_col()];
-
-			}
-		}
-		cout << endl;
 }

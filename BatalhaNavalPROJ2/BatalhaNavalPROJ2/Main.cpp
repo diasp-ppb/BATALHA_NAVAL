@@ -17,12 +17,7 @@ string Select_file()
 	return File_name;
 
 }
-string PlayerName()
-{
-	cout << "Qual e o nome do jogador? ";
-	string a;
-	getline(cin, a, '\n');
-}
+
 void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
@@ -32,14 +27,6 @@ void main()
 	TABU.place_all_the_ships();
 	TABU.set_default_status_all_ships();
 	///////////////////////////////////////////////////////////////////////
-	Player HOME = Player(PlayerName(), Select_file());
-	Player AWAY = Player(PlayerName(), Select_file());
-	do
-	{
-		HOME.showBoard();
-		HOME.askCoord();
-
-	} while (HOME.isDead != true || AWAY.isDead != true);
 	/*
 	Beep(330, 100); Sleep(100);
 	Beep(330, 100); Sleep(300);
