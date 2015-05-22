@@ -11,11 +11,11 @@ char Ship::get_ship_symbol()
 {
 	return symbol;
 }
-unsigned int Ship::get_ship_position_col() const
+unsigned int Ship::getColumn() const
 {
 	return position.col;
 }
-unsigned int Ship::get_ship_position_lin() const
+unsigned int Ship::getLine() const
 {
 	return position.lin;
 }
@@ -68,13 +68,30 @@ Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int 
 	this->pos = pos;
 }
 
-bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax)// moves the boat 
+bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the boat 
 {
 	unsigned int col = position.col;
 	unsigned int lin = position.lin;
 	unsigned int maxcol;
 	unsigned int maxlin;
 	char ori = orientation;
+
+	switch (direction) // o deslocamento na direcao
+	{
+	case 'N':
+		lin--;
+		break;
+	case 'S':
+		lin++;
+		break;
+	case 'O':
+		col--;
+		break;
+	case 'E':
+		col++;
+		break;
+	}
+
 	if (orientation == 'H')
 	{
 		maxcol = col + size;
@@ -85,22 +102,7 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		maxcol = col;
 		maxlin = lin + size;
 	}
-	
-	switch (direction) // o deslocamento na direcao
-	{
-		case 'N':
-				lin--;
-				break;
-		case 'S':
-				lin++;
-				break;
-		case 'O':
-				col--;
-				break;
-		case 'E':
-				col++;
-				break;
-	}
+
 	//se houver rotacao
 	if (rotate == true)
 	{    // troca orientacao
@@ -118,7 +120,7 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		}
 	}
 
-	if (lin < lineMin || maxlin >= lineMax || col < columnMin || maxcol >= columnMax) // verifica se sai fora do tabuleiro
+	if (lin < lineMin || --maxlin >= lineMax || col < columnMin || --maxcol >= columnMax) // verifica se sai fora do tabuleiro
 	{
 		return false;
 	}
@@ -131,15 +133,15 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 }
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
-	unsigned int  move = rand() % 4;
-	unsigned int rota = rand() % 1; // true or false;
+	unsigned int  move = rand() % 5;
+  	unsigned int rota = rand() % 1; // true or false;
 	bool rotation = true;
 	if (rota == 0) rotation = false;
 
-	if (move == 1)	return Ship::move('N', rotation, lineMin, columnMax, lineMax, columnMax);
-	else if (move == 2)	return Ship::move('S', rotation, lineMin, columnMax, lineMax, columnMax);
-	else if (move == 3)	return Ship::move('E', rotation, lineMin, columnMax, lineMax, columnMax);
-	else if (move == 4)	return Ship::move('O', rotation, lineMin, columnMax, lineMax, columnMax);
+	if (move == 1)	return Ship::move('N', rotation, lineMin, columnMin, lineMax, columnMax);
+	else if (move == 2)	return Ship::move('S', rotation, lineMin, columnMin, lineMax, columnMax);
+	else if (move == 3)	return Ship::move('E', rotation, lineMin, columnMin, lineMax, columnMax);
+	else if (move == 4)	return Ship::move('O', rotation, lineMin, columnMin, lineMax, columnMax);
 	else if (move == 0)	return true;
 
 	return false;

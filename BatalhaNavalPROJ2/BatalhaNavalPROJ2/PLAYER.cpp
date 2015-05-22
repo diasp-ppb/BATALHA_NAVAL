@@ -48,9 +48,11 @@ Player::Player(string playerName, string boardFilename)
 
 Player::Player(size_t i)
 {	
-	cout << "Qual o nome do player " << i << "? ";
-	getline(cin, name);
-	board = Board(Select_file());
+	//cout << "Qual o nome do player " << i << "? ";
+	//getline(cin, name);
+	//board = Board(Select_file());
+	name[0] = i;
+	board = Board("configBN.txt");
 }
 
 
@@ -121,7 +123,7 @@ It may be necessary to use an auxiliary board to make a preview of the displacem
 */
 
 void Player::attackBoard(const Bomb &b)
-{
+{ 
 	board.moveShips();
 	board.attack(b);
 }

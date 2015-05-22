@@ -17,8 +17,8 @@ public:
 	//==========================FUNCOES ADICIONAIS ==========================
 
 	char get_ship_symbol();
-	unsigned int get_ship_position_col() const;
-	unsigned int get_ship_position_lin() const;
+	unsigned int getColumn() const;
+	unsigned int getLine() const;
 	char get_ship_orientation() const;
 	unsigned int get_ship_size() const;
 	unsigned int get_ship_color() const;
