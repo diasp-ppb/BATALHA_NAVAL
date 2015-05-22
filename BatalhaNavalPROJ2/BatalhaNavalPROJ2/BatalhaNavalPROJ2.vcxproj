@@ -80,6 +80,7 @@
     <ClCompile Include="BOMB.cpp" />
     <ClCompile Include="COLOR_MOD.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SCOREBOARD.cpp" />
     <ClCompile Include="SHIP.cpp" />
     <ClCompile Include="PLAYER.cpp" />
   </ItemGroup>

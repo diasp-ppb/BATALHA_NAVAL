@@ -48,6 +48,9 @@
     <ClCompile Include="COLOR_MOD.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="SCOREBOARD.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\BAtalhaNaval2\BAtalhaNaval2\configBN.txt">

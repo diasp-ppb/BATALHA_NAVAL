@@ -1,0 +1,4 @@
+Antonio	20000
+Maria   15236
+Joao    500
+Manel	252

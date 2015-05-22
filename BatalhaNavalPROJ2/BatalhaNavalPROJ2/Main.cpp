@@ -195,6 +195,10 @@ void print_boards(Player &UM, Player &DOIS)
 	cout << endl;
 	cout << setw(15) << DOIS.get_player_name() << endl;
 	DOIS.showBoard();
+	cout << endl;
+	cout << endl;
+	UM.get_board().show();
+	DOIS.get_board().show();
 }
 void player_turn(Player &UM, Player &DOIS)
 {

@@ -185,9 +185,13 @@ void Board::moveShips() // tries to randmonly move all the ships of the fleet
 {
 	for (size_t i = 0; i < ships.size(); i++)
 	{
+		if (ships[i].isDestroyed() == false)
+		{
 		remove_ship(ships[i].get_ship_position_col(), ships[i].get_ship_position_lin(), ships[i].get_ship_size(), ships[i].get_ship_orientation());
 		ships[i].moveRand(0, 0, numLines, numColumns);
 		putShip(ships[i]);
+		}
+		
 	}
 }
 bool Board::attack(const Bomb &b) // NOT DONE
@@ -316,3 +320,4 @@ ostream& operator<<(ostream& os, const Board& board)
 	setcolor(WHITE, BLACK);
 	return os;
 }
+

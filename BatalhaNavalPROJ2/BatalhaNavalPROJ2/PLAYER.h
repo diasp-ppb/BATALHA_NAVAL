@@ -22,6 +22,7 @@ public:
 	bool Player_DEAD() const;
 	Board get_board() const;
 	string get_player_name() const;
+
 private:
 	string name; // name of the player
 	Board board; // board of the player
