@@ -3,6 +3,8 @@
 #include "PLAYER.h"
 #include "BOARD.h"
 #include "SHIP.h"
+#include "SCOREBOARD.h"
+#include "MENU.h"
 #include <string>
 #include <iostream>
 #include <Windows.h>
@@ -15,9 +17,18 @@ using namespace std;
 
 void print_boards(Player &UM, Player &DOIS);
 void player_turn(Player &UM, Player &DOIS);
+int menu();
+
 void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
+
+	
+	
+
+
+	
+	
 	
 	Player UM = Player(1);
 	Player DOIS = Player(2);
@@ -183,6 +194,14 @@ void main()
 	Beep(1046, 675);*/
 	/////////////////////////////////////////////////////////////////////// 
 	
+}
+int menu()
+{
+	cout << "    Batalha Naval" << endl;
+	cout << "1 - Jogar " << endl;
+	cout << "2 - Pontuacao" << endl;
+	cout << "3 - Sair " << endl;
+
 }
 
 

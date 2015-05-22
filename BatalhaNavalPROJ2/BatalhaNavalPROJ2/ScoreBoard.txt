@@ -1,4 +1,10 @@
-Antonio	20000
-Maria   15236
-Joao    500
-Manel	252
+Antonio            20000
+Maria              15236
+Joao                 540
+Manel                526
+Juna                 252
+joao                 150
+joao                 150
+joao                 150
+Axd                  123
+ASds                 123

@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\BAtalhaNaval2\BAtalhaNaval2\configBN.txt" />
+    <Text Include="ScoreBoard.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BOMB.h" />
