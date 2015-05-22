@@ -104,47 +104,37 @@ void Board::remove_ship(unsigned int col, unsigned int lin, unsigned int size, c
 
 bool Board::putShip(const Ship &s) // adds ship to the board, if possible
 {   //verifica se esta dentro do tabuleiro
-	if (s.get_ship_position_col() < 0 ||
-		(int)s.get_ship_position_col() > numColumns - 1 ||
-		s.get_ship_position_lin() < 0 ||
-		(int)s.get_ship_position_col() > numLines - 1 ||
-		((int)(s.get_ship_position_col() + s.get_ship_size() - 1) >  numColumns && s.get_ship_orientation() == 'H') ||
-		((int)(s.get_ship_position_lin() + s.get_ship_size() - 1) > numLines && s.get_ship_orientation() == 'V'))
+	if (s.getColumn() < 0 ||
+		(int)s.getColumn() > numColumns - 1 ||
+		s.getLine() < 0 ||
+		(int)s.getLine() > numLines - 1 ||
+		(s.get_ship_orientation() == 'H' && (int)(s.getColumn() + s.get_ship_size() - 1) >  numColumns) ||
+		(s.get_ship_orientation() == 'V' && (int)(s.getLine() + s.get_ship_size() - 1) > numLines))
 	{
 		return false;
 	}
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	if (s.get_ship_orientation() == 'H')
+	else if (s.get_ship_orientation() == 'H') // horizontal
 	{
 		for (size_t i = 0; i < (int)s.get_ship_size(); i++) // ve se  é tudo '-1'
 		{
-			if (get_board_position(s.get_ship_position_lin(), s.get_ship_position_col() + i) != -1)
-			{
+			if (get_board_position(s.getLine(), s.getColumn() + i) != -1)
 				return false;
-			}
+		}
+		for (size_t i = 0; i < (int)s.get_ship_size(); i++) // ve se  é tudo '-1'
+		{
+			board[s.getLine()][s.getColumn() + i] = s.get_ship_pos();
 		}
 	}
-	else // se for vertical
-		for (size_t i = 0; i < s.get_ship_size(); i++) // ve se  é tudo '-1'
-		{
-		if (get_board_position((s.get_ship_position_lin() + i), s.get_ship_position_col()) != -1)
-		{
-			return false;
-		}
-		}
-	///////////////////DEPOIS DE VERIFICAR SE È POSSIVEL ADD AO TABULEIRO//////////////////////////////////////////
-	if (s.get_ship_orientation() == 'H')
+	else // vertical
 	{
+		for (size_t i = 0; i < s.get_ship_size(); i++) 
+		{
+			if (get_board_position((s.getLine() + i), s.getColumn()) != -1)
+				return false;
+		}
 		for (size_t i = 0; i < s.get_ship_size(); i++)
 		{
-			board[s.get_ship_position_lin()][s.get_ship_position_col() + i] = s.get_ship_pos();
-		}
-	}
-	else
-	{
-		for (size_t i = 0; i < s.get_ship_size(); i++)
-		{
-			board[s.get_ship_position_lin() + i][s.get_ship_position_col()] = s.get_ship_pos();
+				board[s.getLine() + i][s.getColumn()] = s.get_ship_pos();
 		}
 	}
 	return true;
@@ -162,7 +152,7 @@ bool Board::check_over_position_ship(Ship &ship)
 	{
 		for (size_t i = 0; i < ship.get_ship_size(); i++)
 		{
-			if (board[ship.get_ship_position_lin()][ship.get_ship_position_col() + i] != -1)
+			if (board[ship.getLine()][ship.getColumn() + i] != -1)
 			{
 				return true;
 			}
@@ -172,7 +162,7 @@ bool Board::check_over_position_ship(Ship &ship)
 	{
 		for (size_t i = 0; i < ship.get_ship_size(); i++)
 		{
-			if (board[ship.get_ship_position_lin() + i][ship.get_ship_position_col()] != -1)
+			if (board[ship.getLine() + i][ship.getColumn()] != -1)
 			{
 				return true;
 			}
@@ -187,11 +177,14 @@ void Board::moveShips() // tries to randmonly move all the ships of the fleet
 	{
 		if (ships[i].isDestroyed() == false)
 		{
-		remove_ship(ships[i].get_ship_position_col(), ships[i].get_ship_position_lin(), ships[i].get_ship_size(), ships[i].get_ship_orientation());
-		ships[i].moveRand(0, 0, numLines, numColumns);
-		putShip(ships[i]);
+			int linha = ships[i].getLine(), coluna = ships[i].getColumn();
+			char ori = ships[i].get_ship_orientation();
+			remove_ship(coluna, linha, ships[i].get_ship_size(), ships[i].get_ship_orientation());
+			if (!ships[i].moveRand(0, 0, numLines, numColumns) ||
+				check_over_position_ship(ships[i]))
+				ships[i].modifyPosition(linha, coluna, ori);
+			putShip(ships[i]);
 		}
-		
 	}
 }
 bool Board::attack(const Bomb &b) // NOT DONE
@@ -210,9 +203,9 @@ bool Board::attack(const Bomb &b) // NOT DONE
 		{
 			cout << "Hit!" << endl;
 			if (ships[posicao].get_ship_orientation() == 'H')
-				ships[posicao].attack(coluna - ships[posicao].get_ship_position_col());
+				ships[posicao].attack(coluna - ships[posicao].getColumn());
 			else
-				ships[posicao].attack(linha - ships[posicao].get_ship_position_lin());
+				ships[posicao].attack(linha - ships[posicao].getLine());
 			if (ships[posicao].isDestroyed() == true)
 			{
 				cout << "O navio ";
@@ -221,7 +214,7 @@ bool Board::attack(const Bomb &b) // NOT DONE
 					cout << ships[posicao].get_ship_symbol();
 				}
 				cout << " afundou!!" << endl;
-				remove_ship(ships[posicao].get_ship_position_col(), ships[posicao].get_ship_position_lin(), ships[posicao].get_ship_size(), ships[posicao].get_ship_orientation());
+				remove_ship(ships[posicao].getColumn(), ships[posicao].getLine(), ships[posicao].get_ship_size(), ships[posicao].get_ship_orientation());
 			}
 		}
 		valid = true;
@@ -254,14 +247,14 @@ void Board::display() const // displays the colored board during the game
 			for (size_t j = 0; j < ships[i].get_ship_size(); j++)
 			{
 			setcolor(ships[i].get_ship_color(), LIGHTGRAY);
-			gotoxy(2 * (ships[i].get_ship_position_col() + 1 + j), ships[i].get_ship_position_lin() + 1);  //formula col = (Distancia á margem)+ 2*col
+			gotoxy(2 * (ships[i].getColumn() + 1 + j), ships[i].getLine() + 1);  //formula col = (Distancia á margem)+ 2*col
 			cout << ships[i].get_ship_status()[j];
 			}
 		else
 			for (size_t j = 0; j < ships[i].get_ship_size(); j++)
 			{
 			setcolor(ships[i].get_ship_color(), LIGHTGRAY);
-			gotoxy(ships[i].get_ship_position_col() + 3, ships[i].get_ship_position_lin() + 1 + j);// formula lin= distancia ao topo + 1 + lin
+			gotoxy(ships[i].getColumn() + 3, ships[i].getLine() + 1 + j);// formula lin= distancia ao topo + 1 + lin
 			cout << ships[i].get_ship_status()[j];
 			}
 	}
@@ -307,11 +300,11 @@ ostream& operator<<(ostream& os, const Board& board)
 				setcolor(board.return_ship(posicao).get_ship_color(), LIGHTGRAY);
 				if (board.return_ship(posicao).get_ship_orientation() == 'H')
 				{
-					os << setw(2) << board.return_ship(posicao).get_ship_partition(j - board.return_ship(posicao).get_ship_position_col());
+					os << setw(2) << board.return_ship(posicao).get_ship_partition(j - board.return_ship(posicao).getColumn());
 				}
 				else
 				{
-					os << setw(2) << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).get_ship_position_lin());
+					os << setw(2) << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).getLine());
 				}
 			}
 		}

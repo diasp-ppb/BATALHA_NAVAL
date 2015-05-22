@@ -6,8 +6,8 @@
 Position<char> Bomb::getTargetPosition() const 
 {
 	Position<char> target;
-	target.col = targetLine;
-	target.lin = targetColumn;
+	target.col = targetColumn;
+	target.lin = targetLine;
 
 	return target;
 }
