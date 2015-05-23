@@ -24,7 +24,14 @@ void main()
 	srand((unsigned int)time(NULL)); // nao alterar
 
 	
-
+	scoreboard tabel = scoreboard();
+	tabel.show_scores();
+	tabel.update_scoreboard("joao", 12);
+	tabel.update_scoreboard("joao", 12);
+	tabel.update_scoreboard("joao", 12);
+	tabel.update_scoreboard("joao", 100);
+	tabel.show_scores();
+	system("pause");
 
 
 

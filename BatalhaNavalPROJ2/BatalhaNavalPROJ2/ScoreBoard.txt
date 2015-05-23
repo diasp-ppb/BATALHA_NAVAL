@@ -1,4 +1,7 @@
-Antonio	20000
-Maria   15236
-Joao    500
-Manel	252
+Antonio	10
+Maria   15
+Joao    20
+Manel	30
+Joaoana 40
+Ana		50
+MAria	80

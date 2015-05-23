@@ -25,7 +25,7 @@ void scoreboard::update_scoreboard(string playername, size_t score)
 	size_t i;
 	for (i = 0; i < scores.size(); i++)
 	{
-		if (scores[i].score < score)
+		if (scores[i].score > score)
 			break;
 	}
 
@@ -52,7 +52,7 @@ bool scoreboard::top_scores(size_t &sc) const
 {
 	for (size_t i = 0; i < scores.size(); i++)
 	{
-		if (scores[i].score < sc)
+		if (scores[i].score > sc)
 			return true;
 	}
 	return false;
