@@ -1,5 +1,3 @@
-
-
 #ifndef _SHIP
 #define _SHIP
 
@@ -13,12 +11,12 @@ class Ship
 {
 public:
 	Ship(char symbol, Position<char> position, char orientation, unsigned int size,
-		unsigned int color,size_t pos);
+		unsigned int color, size_t pos);
 	//==========================FUNCOES ADICIONAIS ==========================
 
 	char get_ship_symbol();
-	unsigned int getColumn() const;
-	unsigned int getLine() const;
+	int getColumn() const;
+	int getLine() const;
 	char get_ship_orientation() const;
 	unsigned int get_ship_size() const;
 	unsigned int get_ship_color() const;
@@ -26,10 +24,11 @@ public:
 	char get_ship_partition(size_t index) const;
 	void set_default_status();
 	size_t get_ship_pos() const;
+	void modifyPosition(int line, int column, char ori);
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
 	// ^ é preciso pensar isto melhor^
-		bool moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
+	bool moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int
 		lineMax, unsigned int columnMax); // moves the ship randomly
 	bool attack(size_t partNumber); //partNumber = {0,1,…, size-1}
 	bool isDestroyed() const; // checks whether the ship is destroyed

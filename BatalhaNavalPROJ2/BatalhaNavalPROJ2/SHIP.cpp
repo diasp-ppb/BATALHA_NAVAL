@@ -1,9 +1,7 @@
-	#include "TYPES.h"
+#include "TYPES.h"
 #include "SHIP.h"
 #include <iostream>
 #include "BOARD.h"
-
-
 
 //==========================FUNCOES ADICIONAIS ==========================
 
@@ -11,37 +9,44 @@ char Ship::get_ship_symbol()
 {
 	return symbol;
 }
-unsigned int Ship::getColumn() const
+
+int Ship::getColumn() const
 {
 	return position.col;
 }
-unsigned int Ship::getLine() const
+
+int Ship::getLine() const
 {
 	return position.lin;
 }
+
 char  Ship::get_ship_orientation() const
 {
 	return orientation;
 }
+
 unsigned int  Ship::get_ship_size() const
 {
 	return size;
 }
+
 unsigned int  Ship::get_ship_color() const
 {
 	return color;
 }
+
 string Ship::get_ship_status() const
 {
 	return status;
 }
+
 void Ship::set_default_status()
 {
 	string a;
 	a.resize(size);
 	for (size_t i = 0; i < size; i++)//cria o default do status tipo "PPPPP"
 	{
-		a[i]= symbol;
+		a[i] = symbol;
 	}
 	status = a;
 
@@ -57,7 +62,7 @@ size_t Ship::get_ship_pos() const
 	return pos;
 }
 //=============================================================================
-Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size,	unsigned int color,size_t pos)
+Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size, unsigned int color, size_t pos)
 {
 	this->symbol = symbol;
 	this->position.col = position.col - 97;
@@ -66,6 +71,14 @@ Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int 
 	this->size = size;
 	this->color = color;
 	this->pos = pos;
+}
+
+void Ship::modifyPosition(int line, int column, char ori)
+{
+	position.lin = line;
+	position.col = column;
+	orientation = ori;
+
 }
 
 bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the boat 
@@ -79,62 +92,61 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 	switch (direction) // o deslocamento na direcao
 	{
 	case 'N':
+		if (lin == 0)
+			return false;
 		lin--;
 		break;
 	case 'S':
+		if (lin == 0)
+			return false;
 		lin++;
 		break;
 	case 'O':
+		if (col == 0)
+			return false;
 		col--;
 		break;
 	case 'E':
+		if (col == 0)
+			return false;
 		col++;
 		break;
 	}
 
+	if (rotate == true)
+		if (ori == 'H')
+			ori = 'V';
+		else
+			ori = 'H';
+
+
 	if (orientation == 'H')
 	{
-		maxcol = col + size;
+		maxcol = col + size - 1;
 		maxlin = lin;
 	}
 	else // 'V'
 	{
 		maxcol = col;
-		maxlin = lin + size;
+		maxlin = lin + size - 1;
 	}
 
-	//se houver rotacao
-	if (rotate == true)
-	{    // troca orientacao
-		if (ori == 'H')
-		{
-			ori = 'V';
-			maxcol = col;
-			maxlin = lin + size;
-		}
-		else
-		{
-			ori = 'H';
-			maxcol = col + size;
-			maxlin = lin;
-		}
-	}
-
-	if (lin < lineMin || --maxlin >= lineMax || col < columnMin || --maxcol >= columnMax) // verifica se sai fora do tabuleiro
+	if (lin < lineMin || maxlin >= lineMax || col < columnMin || maxcol >= columnMax) // verifica se sai fora do tabuleiro
 	{
 		return false;
 	}
-	
+
 	position.col = col;
-	position.col = lin;
+	position.lin = lin;
 	orientation = ori;
 
 	return true;
 }
+
 bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax) // moves the ship randomly
 {
-	unsigned int  move = rand() % 5;
-  	unsigned int rota = rand() % 1; // true or false;
+	unsigned int move = rand() % 5;
+	unsigned int rota = rand() % 2; // true or false;
 	bool rotation = true;
 	if (rota == 0) rotation = false;
 
@@ -142,21 +154,22 @@ bool Ship::moveRand(unsigned int lineMin, unsigned int columnMin, unsigned int l
 	else if (move == 2)	return Ship::move('S', rotation, lineMin, columnMin, lineMax, columnMax);
 	else if (move == 3)	return Ship::move('E', rotation, lineMin, columnMin, lineMax, columnMax);
 	else if (move == 4)	return Ship::move('O', rotation, lineMin, columnMin, lineMax, columnMax);
-	else if (move == 0)	return true;
-
-	return false;
+	else
+		return false;
 }
+
 bool Ship::attack(size_t partNumber) //partNumber = {0,1,…, size-1}
 {
-	
+
 	if (partNumber < size)
 	{
 		status[partNumber] = tolower(symbol);
 		return true;
 	}
-	
+
 	return false;
 }
+
 bool Ship::isDestroyed() const // checks whether the ship is destroyed
 {
 	bool valid = false;
@@ -170,6 +183,7 @@ bool Ship::isDestroyed() const // checks whether the ship is destroyed
 		valid = true;
 	return valid;
 }
+
 void Ship::show() const // shows the attributes of the ship (for debugging)
 {
 	cout << "Ship size: " << size << "\n Orientation: " << orientation << "\n Ship color: " << color << "\n Ship Status: " << status << "\n Ship Position: " << position.lin << position.col << endl;

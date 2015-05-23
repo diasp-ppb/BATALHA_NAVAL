@@ -3,11 +3,11 @@
 #include "TYPES.h"
 
 // returns target position, using the private values
-Position<char> Bomb::getTargetPosition() const 
+Position<char> Bomb::getTargetPosition() const
 {
 	Position<char> target;
-	target.col = targetLine;
-	target.lin = targetColumn;
+	target.col = targetColumn;
+	target.lin = targetLine;
 
 	return target;
 }
@@ -25,7 +25,7 @@ Position<char> Bomb::getActualPosition() const
 // Bomb Constructor
 Bomb::Bomb(Position<char> targetPosition)
 {
-	unsigned int offset = (rand() % 6); 
+	unsigned int offset = (rand() % 6);
 	unsigned int line = targetPosition.lin, column = targetPosition.col;
 
 	targetLine = line;
@@ -33,7 +33,7 @@ Bomb::Bomb(Position<char> targetPosition)
 
 	// fazer condiçao de calhar fora do tabuleiro
 
-	if (offset == 0 ) // 1/6
+	if (offset == 0) // 1/6
 	{
 		unsigned int direction = (rand() % 4); // generates direction of offset
 		if (direction == 0) // Norte

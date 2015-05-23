@@ -3,6 +3,8 @@
 #include "PLAYER.h"
 #include "BOARD.h"
 #include "SHIP.h"
+#include "SCOREBOARD.h"
+//#include "MENU.h"
 #include <string>
 #include <iostream>
 #include <Windows.h>
@@ -15,13 +17,22 @@ using namespace std;
 
 void print_boards(Player &UM, Player &DOIS);
 void player_turn(Player &UM, Player &DOIS);
+//int menu();
+
 void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
+
 	
+
+
+
+
+
+
 	Player UM = Player(1);
 	Player DOIS = Player(2);
-	
+
 	do
 	{
 		system("cls");
@@ -33,16 +44,16 @@ void main()
 		// gotoxy(0, 4 + UM.get_board().getLines());
 		system("cls");
 		print_boards(UM, DOIS);
-		player_turn(DOIS,UM); // turno PL 2
+		player_turn(DOIS, UM); // turno PL 2
 
 		//gotoxy(0, 0);
 		//UM.showBoard();
 		//gotoxy(0, 8 + UM.get_board().getLines());
-		
+
 		if (UM.Player_DEAD() == true) break;
 		print_boards(UM, DOIS);
 	} while (UM.Player_DEAD() != true || DOIS.Player_DEAD() != true);
-	
+
 	///////////////////////////////////////////////////////////////////////
 	/*
 	Beep(330, 100); Sleep(100);
@@ -146,7 +157,7 @@ void main()
 	Beep(220, 200); Sleep(50);
 	Beep(196, 100); Sleep(700);
 	/*Intro*/
-/*
+	/*
 	Beep(330, 100); Sleep(100);
 	Beep(330, 100); Sleep(300);
 	Beep(330, 100); Sleep(300);
@@ -182,8 +193,17 @@ void main()
 	Beep(932, 100); Sleep(125);
 	Beep(1046, 675);*/
 	/////////////////////////////////////////////////////////////////////// 
-	
+
 }
+/*
+int menu()
+{
+	cout << "    Batalha Naval" << endl;
+	cout << "1 - Jogar " << endl;
+	cout << "2 - Pontuacao" << endl;
+	cout << "3 - Sair " << endl;
+}
+*/
 
 
 void print_boards(Player &UM, Player &DOIS)
