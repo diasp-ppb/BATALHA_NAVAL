@@ -17,8 +17,8 @@ public:
 	//==========================FUNCOES ADICIONAIS ==========================
 
 	char get_ship_symbol();
-	int getColumn() const;
-    int getLine() const;
+	unsigned int getColumn() const;
+	unsigned int getLine() const;
 	char get_ship_orientation() const;
 	unsigned int get_ship_size() const;
 	unsigned int get_ship_color() const;
@@ -26,7 +26,6 @@ public:
 	char get_ship_partition(size_t index) const;
 	void set_default_status();
 	size_t get_ship_pos() const;
-	void modifyPosition(int line, int column, char ori);
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
 	// ^ é preciso pensar isto melhor^
