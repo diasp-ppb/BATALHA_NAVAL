@@ -97,8 +97,6 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		lin--;
 		break;
 	case 'S':
-		if (lin == 0)
-			return false;
 		lin++;
 		break;
 	case 'O':
@@ -107,8 +105,6 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 		col--;
 		break;
 	case 'E':
-		if (col == 0)
-			return false;
 		col++;
 		break;
 	}
@@ -120,7 +116,7 @@ bool Ship::move(char direction, bool rotate, unsigned int lineMin, unsigned int 
 			ori = 'H';
 
 
-	if (orientation == 'H')
+	if (ori == 'H')
 	{
 		maxcol = col + size - 1;
 		maxlin = lin;

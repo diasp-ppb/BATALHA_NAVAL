@@ -80,7 +80,7 @@ bool Player::isContained(char value, int max)
 {
 	bool contido = true;
 
-	if ((int)value > max)
+	if ((int)value >= max || (int)value < 0)
 		contido = false;
 
 	return contido;
