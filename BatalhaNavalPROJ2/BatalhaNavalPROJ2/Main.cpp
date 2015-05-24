@@ -27,8 +27,8 @@ void shoW_scoreboard();
 void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
-
 	menu();
+	
 }
 
 void playgame()
@@ -48,7 +48,11 @@ void playgame()
 		// atualiza o tempo
 		UM.set_time(UM.get_time() + (clock() - begin_time));   // tempo gasto + ( tempo inicio de turno  - tempo fianl do turno)
 
-		if (DOIS.Player_DEAD() == true) break;
+		if (DOIS.Player_DEAD() == true)
+		{
+				double end_time = UM.get_time() / CLOCKS_PER_SEC; // resultado em segundos;
+				player_win(DOIS, UM, end_time);
+		}
 
 
 		system("cls");
@@ -61,24 +65,15 @@ void playgame()
 		DOIS.set_time(DOIS.get_time() + (clock() - begin_time2));   // tempo gasto + ( tempo inicio de turno  - tempo fianl do turno)
 
 
-		if (UM.Player_DEAD() == true) break;
+		if (UM.Player_DEAD() == true)
+		{
+			
+				double end_time = DOIS.get_time() / CLOCKS_PER_SEC; // resultado em segundos;
+				player_win(UM, DOIS, end_time);
+			
+		}
 		print_boards(UM, DOIS);
 	} while (UM.Player_DEAD() != true || DOIS.Player_DEAD() != true);
-
-
-	if (UM.Player_DEAD())
-	{
-		double end_time = DOIS.get_time() / CLOCKS_PER_SEC; // resultado em segundos;
-		player_win(UM, DOIS, end_time);
-
-	}
-
-	else if (DOIS.Player_DEAD())
-	{
-		double end_time = UM.get_time() / CLOCKS_PER_SEC; // resultado em segundos;
-		player_win(DOIS, UM, end_time);
-	}
-
 
 }
 
@@ -144,13 +139,19 @@ void player_turn(Player &UM, Player &DOIS)
 void player_win(Player &UM, Player &DOIS, double &endtime)
 {
 	system("cls");
-	cout << "PARABÉNS " << DOIS.get_player_name() << ", ganhaste!!!" << endl;
+	setcolor(GREEN, BLACK);
+	cout << "========================================================" << endl;
+	cout << "=  PARABENS " << DOIS.get_player_name() << ", ganhaste!!!" << endl;
+	cout << "========================================================" << endl;
+	setcolor(WHITE, BLACK);
 	size_t Area = DOIS.get_board().getColumns() * DOIS.get_board().getLines();
 	size_t score = endtime * (DOIS.get_board().get_ships_size() / Area);
 	scoreboard TAB = scoreboard();
 	if (TAB.top_scores(score))
 	{
+		setcolor(RED, BLACK);
 		cout << "ESTAS NO TOP 10!!" << endl;
+		setcolor(WHITE, BLACK);
 		system("pause");
 		TAB.update_scoreboard(DOIS.get_player_name(), score);
 		system("cls");

@@ -222,7 +222,9 @@ bool Board::attack(const Bomb &b) // NOT DONE
 			cout << "Miss!" << endl;
 		else
 		{
+			setcolor(ships[posicao].get_ship_color(), BLACK);
 			cout << "Hit!" << endl;
+			setcolor(WHITE, BLACK);
 			if (ships[posicao].get_ship_orientation() == 'H')
 				ships[posicao].attack(coluna - ships[posicao].getColumn());
 			else
@@ -336,6 +338,6 @@ ostream& operator<<(ostream& os, const Board& board)
 
 		os << endl;
 	}
-	setcolor(LIGHTGRAY, BLACK);
+	setcolor(WHITE, BLACK);
 	return os;
 }

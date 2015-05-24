@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include "COLOR_MOD.h"
 
 using namespace std;
 
@@ -47,6 +48,13 @@ void scoreboard::update_scoreboard(string playername, size_t score)
 		newscores.resize(10);
 	}
 	scores = newscores;
+
+	ofstream savefile("ScoreBoard.txt");
+	
+	for (size_t i = 0; i < scores.size(); i++)
+	{
+		savefile << scores[i].name << setw(10) << scores[i].score << "\n";
+	}
 }
 bool scoreboard::top_scores(size_t &sc) const
 {
@@ -59,20 +67,16 @@ bool scoreboard::top_scores(size_t &sc) const
 }
 void scoreboard::show_scores()
 {
+	setcolor(GREEN, BLACK);
 	cout << "=================================" << endl
 		<< "             SCOREBOARD            " << endl
 		<< endl;
+	setcolor(WHITE, BLACK);
 	for (size_t i = 0; i < scores.size(); i++)
 	{
 		cout << setw(10) << left << scores[i].name << setw(12) << right << "--------->" << setw(10) << right << scores[i].score << endl;
 	}
+	setcolor(GREEN, BLACK);
 	cout << endl << "=================================" << endl;
-}
-void scoreboard::save_scores()
-{
-	ofstream savefile("ScoreBoard.txt");
-	for (size_t i = 0; i < scores.size(); i++)
-	{
-		savefile << setw(10) << left << scores[i].name << setw(14) << right << scores[i].score << endl;
-	}
+	setcolor(WHITE, BLACK);
 }

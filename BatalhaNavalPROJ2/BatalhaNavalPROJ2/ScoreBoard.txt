@@ -1,7 +1,10 @@
-Antonio	10
-Maria   15
-Joao    20
-Manel	30
-Joaoana 40
-Ana		50
-MAria	80
+aaa         0
+BBBB         0
+joao        20
+joao        20
+Antonio      1000
+Maria      1500
+Joao      2000
+Manel      3000
+Joaoana      4000
+Ana      5000

@@ -85,9 +85,6 @@
     <ClCompile Include="PLAYER.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\BAtalhaNaval2\BAtalhaNaval2\configBN.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BOMB.h" />
     <ClInclude Include="BOARD.h" />
     <ClInclude Include="COLOR_MOD.h" />
@@ -95,6 +92,9 @@
     <ClInclude Include="TYPES.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="SHIP.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ScoreBoard.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
