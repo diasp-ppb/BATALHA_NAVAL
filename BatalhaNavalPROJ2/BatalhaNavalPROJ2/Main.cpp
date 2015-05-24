@@ -9,7 +9,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <ctime>
-#include <fstream>
+#include <fstream>	
 #include <iomanip>
 #include <ctime>
 
@@ -145,6 +145,7 @@ void print_boards(Player &UM, Player &DOIS)
 	cout << setw(15) << DOIS.get_player_name() << endl;
 	DOIS.showBoard();
 
+	// formula lado a lado: (2 * UM.get_board().getColumns()) + 2 + 5
 }
 void player_turn(Player &UM, Player &DOIS)
 {

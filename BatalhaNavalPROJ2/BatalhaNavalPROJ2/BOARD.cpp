@@ -330,7 +330,10 @@ ostream& operator<<(ostream& os, const Board& board)
 					os << setw(2) << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).getLine());
 				}
 			}
+			if (j == (board.getColumns() - 1))
+				os << " ";
 		}
+
 		os << endl;
 	}
 	setcolor(WHITE, BLACK);
