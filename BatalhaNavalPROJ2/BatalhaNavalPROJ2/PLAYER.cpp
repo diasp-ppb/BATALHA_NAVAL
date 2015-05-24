@@ -5,6 +5,7 @@
 #include "BOARD.h"
 #include "TYPES.h"
 #include <fstream>
+#include <ctime>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool checkExistence(std::string filename)
@@ -145,4 +146,13 @@ string Player::get_player_name() const
 Board Player::get_board() const
 {
 	return board;
+}
+
+clock_t Player::get_time() const
+{
+	return time;
+}
+void Player::set_time(clock_t time)
+{
+	this->time = time;
 }

@@ -36,39 +36,46 @@ void playgame()
 
 	Player UM = Player(1);
 	Player DOIS = Player(2);
-	const clock_t begin_time = clock();
+	
 	do
 	{
 		system("cls");
 		print_boards(UM, DOIS);
+		//tempo PL1
+		clock_t begin_time = clock();
+
 		player_turn(UM, DOIS); // turno PL 1
+		// atualiza o tempo
+		UM.set_time(UM.get_time() + (clock() - begin_time));   // tempo gasto + ( tempo inicio de turno  - tempo fianl do turno)
 
 		if (DOIS.Player_DEAD() == true) break;
 
 		
 		system("cls");
 		print_boards(UM, DOIS);
-		player_turn(DOIS, UM); // turno PL 2
+		//tempo PL2
+		clock_t begin_time2 = clock();
 
+		player_turn(DOIS, UM); // turno PL 2
+		
+		DOIS.set_time(DOIS.get_time() + (clock() - begin_time2));   // tempo gasto + ( tempo inicio de turno  - tempo fianl do turno)
 	
 
 		if (UM.Player_DEAD() == true) break;
 		print_boards(UM, DOIS);
 	} while (UM.Player_DEAD() != true || DOIS.Player_DEAD() != true);
-	/// TEMPO FINAL //
-	double end_time = (clock() - begin_time) / CLOCKS_PER_SEC; // resultado em segundos;
 	
 
 	if (UM.Player_DEAD())
 	{
-		cout << "PARABENS!" << DOIS.get_player_name() << "ganhas-te!!!" << endl;
+		double end_time = DOIS.get_time() / CLOCKS_PER_SEC; // resultado em segundos;
 		player_win(UM, DOIS, end_time);
 		
 	}
 		
 	else if (DOIS.Player_DEAD())
 	{
-		cout << "PARABENS!" << UM.get_player_name() << "ganhas-te!!!" << endl;
+		double end_time = UM.get_time() / CLOCKS_PER_SEC; // resultado em segundos;
 		player_win(DOIS, UM, end_time);
 	}
 		
@@ -138,10 +145,7 @@ void print_boards(Player &UM, Player &DOIS)
 	cout << endl;
 	cout << setw(15) << DOIS.get_player_name() << endl;
 	DOIS.showBoard();
-	cout << endl;
-	cout << endl;
-	UM.get_board().show();
-	DOIS.get_board().show();
+	
 }
 void player_turn(Player &UM, Player &DOIS)
 {
