@@ -184,3 +184,13 @@ void Ship::show() const // shows the attributes of the ship (for debugging)
 {
 	cout << "Ship size: " << size << "\n Orientation: " << orientation << "\n Ship color: " << color << "\n Ship Status: " << status << "\n Ship Position: " << position.lin << position.col << endl;
 }
+
+ostream& operator<<(ostream& os, const Ship & ship)
+{
+	os << "Navio : " << ship.status << endl
+		<< "Tamanho : " << ship.size << endl
+		<< "Cor :  " << ship.color << endl
+		<< "Simbolo :" << ship.symbol << endl
+		<< "Posicao :" << ship.position.lin << ship.position.col << endl
+		<< "Posicao no vetor de navios: " << ship.pos << endl;
+}

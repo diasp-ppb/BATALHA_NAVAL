@@ -24,6 +24,7 @@ public:
 	string get_player_name() const;
 	double get_time() const;
 	void set_time(double _time);
+	friend ostream& operator<<(ostream& os, const Player& board);
 
 private:
 	string name; // name of the player

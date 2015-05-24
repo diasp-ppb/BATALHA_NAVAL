@@ -25,6 +25,7 @@ public:
 	void set_default_status();
 	size_t get_ship_pos() const;
 	void modifyPosition(int line, int column, char ori);
+	friend ostream& operator<<(ostream& os, const Ship& ship);
 	//=============================================================================
 	bool move(char direction, bool rotate, unsigned int lineMin, unsigned int columnMin, unsigned int lineMax, unsigned int columnMax); // moves the boat (SEE NOTES)
 	// ^ é preciso pensar isto melhor^

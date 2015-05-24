@@ -45,6 +45,7 @@ Player::Player(string playerName, string boardFilename)
 {
 	name = playerName;
 	board = Board(boardFilename);
+	time = 0;
 }
 
 Player::Player(size_t i)
@@ -54,6 +55,7 @@ Player::Player(size_t i)
 	//board = Board(Select_file());
 	name[0] = i;
 	board = Board("configBN.txt");
+	time = 0;
 }
 
 
@@ -148,4 +150,11 @@ double Player::get_time() const
 void Player::set_time(double _time)
 {
 	time = _time;
+}
+
+ostream& operator<<(ostream& os, const Player& player)
+{
+	os << "Jogador : " << player.name << endl
+		<< "Tempo : " << player.time << endl
+		<< "Tabuleiro " << endl << player.board << endl;
 }
