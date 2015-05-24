@@ -141,11 +141,11 @@ Board Player::get_board() const
 	return board;
 }
 
-clock_t Player::get_time() const
+double Player::get_time() const
 {
 	return time;
 }
-void Player::set_time(clock_t time)
+void Player::set_time(double _time)
 {
-	this->time = time;
+	time = _time;
 }

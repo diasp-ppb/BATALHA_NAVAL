@@ -216,7 +216,9 @@ bool Board::attack(const Bomb &b) // NOT DONE
 		coluna >= 0 && coluna < numColumns)
 	{
 		int posicao = board[linha][coluna];
-		if (posicao == -1 || ships[posicao].isDestroyed() == true)
+		if (posicao == -1
+			|| (ships[posicao].get_ship_orientation() == 'H' && islower(ships[posicao].get_ship_status()[coluna - ships[posicao].getColumn()]))
+			|| (ships[posicao].get_ship_orientation() == 'V' && islower(ships[posicao].get_ship_status()[linha - ships[posicao].getLine()])))
 			cout << "Miss!" << endl;
 		else
 		{

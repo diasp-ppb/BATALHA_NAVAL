@@ -153,6 +153,7 @@ void player_turn(Player &UM, Player &DOIS)
 }
 void player_win(Player &UM, Player &DOIS, double &endtime)
 {
+	system("cls");
 	cout << "PARABENS!" << DOIS.get_player_name() << "ganhas-te!!!" << endl;
 	size_t Area = DOIS.get_board().getColumns() * DOIS.get_board().getLines();
 	size_t score = endtime * (DOIS.get_board().get_ships_size() / Area);
@@ -170,6 +171,7 @@ void player_win(Player &UM, Player &DOIS, double &endtime)
 }
 void shoW_scoreboard()
 {
+	system("cls");
 	scoreboard TAB = scoreboard();
 	TAB.show_scores();
 	system("pause");
