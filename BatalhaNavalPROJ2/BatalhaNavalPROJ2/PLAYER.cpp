@@ -157,4 +157,6 @@ ostream& operator<<(ostream& os, const Player& player)
 	os << "Jogador : " << player.name << endl
 		<< "Tempo : " << player.time << endl
 		<< "Tabuleiro " << endl << player.board << endl;
+
+	return os;
 }

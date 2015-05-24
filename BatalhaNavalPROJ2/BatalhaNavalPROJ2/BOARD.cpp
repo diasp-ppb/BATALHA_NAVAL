@@ -336,6 +336,6 @@ ostream& operator<<(ostream& os, const Board& board)
 
 		os << endl;
 	}
-	setcolor(WHITE, BLACK);
+	setcolor(LIGHTGRAY, BLACK);
 	return os;
 }

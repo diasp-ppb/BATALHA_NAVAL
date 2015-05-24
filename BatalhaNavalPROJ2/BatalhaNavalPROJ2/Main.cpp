@@ -88,51 +88,40 @@ void menu()
 	cout << "1 - Jogar " << endl;
 	cout << "2 - Pontuacao" << endl;
 	cout << "3 - Sair " << endl;
-	cout << endl << endl;
+	cout << "\nIntroduza a opcao pretendida: ";
 
 	switch (select_menu())
 	{
-	case 1:
+	case '1':
 		playgame();
 		break;
-	case 2:
+	case '2':
 		shoW_scoreboard();
 		break;
-	case 3:
+	case '3':
 		exit(0);
 		break;
 	}
 	system("pause");
-
-
-
 }
 
 int select_menu()
 {
-	int a;
-	bool invalid = false;
-	do
+	string linha = "";
+	
+	while (linha.length() != 1)
 	{
-		invalid = false;
-		cout << "Qual e a opcao? ";
-
-		cin >> a;
-		if (cin.fail())
-		{
+		getline(cin, linha);
+		if (cin.eof())
 			cin.clear();
-		}
-		else if (a < 1 || a > 3)
+
+		if (linha.length() != 1 || (linha.length() == 1 && linha[0] != '1' && linha[0] != '2' && linha[0] != '3'))
 		{
-			invalid = true;
-			cout << "Introduza uma das opcoes.... Por favor!" << endl;
-
+			cout << "Opcao invalida. Introduza a opcao pretendida: ";
+			linha = "";
 		}
-		cin.ignore(1000, '\n');
-	} while (cin.fail() || invalid);
-
-	return a;
-
+	}
+	return linha[0];
 }
 
 void print_boards(Player &UM, Player &DOIS)

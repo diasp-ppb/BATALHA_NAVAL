@@ -193,4 +193,6 @@ ostream& operator<<(ostream& os, const Ship & ship)
 		<< "Simbolo :" << ship.symbol << endl
 		<< "Posicao :" << ship.position.lin << ship.position.col << endl
 		<< "Posicao no vetor de navios: " << ship.pos << endl;
+
+	return os;
 }
