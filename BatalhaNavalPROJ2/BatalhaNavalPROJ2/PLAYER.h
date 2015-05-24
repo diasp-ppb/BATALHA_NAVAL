@@ -22,10 +22,13 @@ public:
 	bool Player_DEAD() const;
 	Board get_board() const;
 	string get_player_name() const;
+	clock_t get_time() const;
+	void set_time(clock_t _time);
 
 private:
 	string name; // name of the player
 	Board board; // board of the player
+	clock_t time;
 };
 
 #endif

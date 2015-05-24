@@ -1,10 +1,11 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include "PLAYER.h"
 #include "BOMB.h"
 #include "BOARD.h"
 #include "TYPES.h"
 #include <fstream>
+#include <ctime>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool checkExistence(std::string filename)
@@ -35,7 +36,7 @@ string Select_file()
 			exit(1);
 		if (!checkExistence(a))
 			invalido = true;
-	} while (cin.fail() || invalido); // realiza o ciclo enquanto o ficheiro introduzido não for válido ou não existir;
+	} while (cin.fail() || invalido); // realiza o ciclo enquanto o ficheiro introduzido nï¿½o for vï¿½lido ou nï¿½o existir;
 	return a;
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +48,7 @@ Player::Player(string playerName, string boardFilename)
 }
 
 Player::Player(size_t i)
-{	
+{
 	//cout << "Qual o nome do player " << i << "? ";
 	//getline(cin, name);
 	//board = Board(Select_file());
@@ -86,7 +87,7 @@ bool Player::isContained(char value, int max)
 	return contido;
 }
 
-Bomb Player::getBomb() 
+Bomb Player::getBomb()
 {
 	char lin, col;
 	Position<char> target;
@@ -115,15 +116,8 @@ Bomb Player::getBomb()
 	return bomba;
 }
 
-/*
-Method attackBoard() "receives" a bomb that was sent by the opponent player and updates the
-own board and ships, taking into account the damages caused by the bomb, but, before accounting
-for the damages, it moves his / her own ships, in a random way, trying to escape from the bomb.
-It may be necessary to use an auxiliary board to make a preview of the displacement of the ships.
-*/
-
 void Player::attackBoard(const Bomb &b)
-{ 
+{
 	board.moveShips();
 	board.attack(b);
 }
@@ -145,4 +139,13 @@ string Player::get_player_name() const
 Board Player::get_board() const
 {
 	return board;
+}
+
+clock_t Player::get_time() const
+{
+	return time;
+}
+void Player::set_time(clock_t time)
+{
+	this->time = time;
 }

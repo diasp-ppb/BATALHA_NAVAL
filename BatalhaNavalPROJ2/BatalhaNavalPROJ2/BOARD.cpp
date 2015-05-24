@@ -62,6 +62,16 @@ bool Board::allShipsDead() const
 	return dead;
 }
 
+int Board::get_ships_size() const
+{
+	int a = 0;
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		a = a + ships[i].get_ship_size();
+	}
+	return a;
+}
+
 Board::Board()
 {
 	numLines = 0;
