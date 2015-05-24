@@ -28,7 +28,7 @@ void main()
 {
 	srand((unsigned int)time(NULL)); // nao alterar
 
-	menu();
+	 menu();
 }
 
 void playgame()
@@ -45,33 +45,33 @@ void playgame()
 
 		if (DOIS.Player_DEAD() == true) break;
 
-
+		
 		system("cls");
 		print_boards(UM, DOIS);
 		player_turn(DOIS, UM); // turno PL 2
 
-
+	
 
 		if (UM.Player_DEAD() == true) break;
 		print_boards(UM, DOIS);
 	} while (UM.Player_DEAD() != true || DOIS.Player_DEAD() != true);
 	/// TEMPO FINAL //
 	double end_time = (clock() - begin_time) / CLOCKS_PER_SEC; // resultado em segundos;
-
+	
 
 	if (UM.Player_DEAD())
 	{
 		cout << "PARABENS!" << DOIS.get_player_name() << "ganhas-te!!!" << endl;
 		player_win(UM, DOIS, end_time);
-
+		
 	}
-
+		
 	else if (DOIS.Player_DEAD())
 	{
 		cout << "PARABENS!" << UM.get_player_name() << "ganhas-te!!!" << endl;
 		player_win(DOIS, UM, end_time);
 	}
-
+		
 
 }
 
@@ -82,7 +82,7 @@ void menu()
 	cout << "2 - Pontuacao" << endl;
 	cout << "3 - Sair " << endl;
 	cout << endl << endl;
-
+	
 	switch (select_menu())
 	{
 	case 1:
@@ -96,7 +96,7 @@ void menu()
 		break;
 	}
 	system("pause");
-
+	
 
 
 }
@@ -107,25 +107,25 @@ int select_menu()
 	bool invalid = false;
 	do
 	{
-		invalid = false;
-		cout << "Qual e a opcao? ";
+	invalid = false;
+	cout << "Qual e a opcao? ";
 
-		cin >> a;
-		if (cin.fail())
-		{
-			cin.clear();
-		}
-		else if (a < 1 || a > 3)
-		{
-			invalid = true;
-			cout << "Introduza uma das opcoes.... Por favor!" << endl;
+	cin >> a;
+	if (cin.fail())
+	{
+		cin.clear();
+	}
+	else if ( a < 1 || a > 3)
+	{	invalid = true;
+		cout << "Introduza uma das opcoes.... Por favor!" << endl;
+		
+	}
+	
+	
+	
 
-		}
-
-	} while (cin.fail() || invalid);
-
-	cin.ignore(1000, '\n');
-
+	} while (cin.fail() || invalid );
+	
 	return a;
 
 }
@@ -140,15 +140,15 @@ void print_boards(Player &UM, Player &DOIS)
 	DOIS.showBoard();
 	cout << endl;
 	cout << endl;
-	//UM.get_board().show();
-	//DOIS.get_board().show();
+	UM.get_board().show();
+	DOIS.get_board().show();
 }
 void player_turn(Player &UM, Player &DOIS)
 {
 	cout << "Jogador: " << UM.get_player_name() << endl;
 	DOIS.attackBoard(UM.getBomb());
 }
-void player_win(Player &UM, Player &DOIS, double &endtime)
+void player_win(Player &UM, Player &DOIS,double &endtime)
 {
 	cout << "PARABENS!" << DOIS.get_player_name() << "ganhas-te!!!" << endl;
 	size_t Area = DOIS.get_board().getColumns() * DOIS.get_board().getLines();
