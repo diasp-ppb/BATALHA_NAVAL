@@ -50,11 +50,15 @@ Player::Player(string playerName, string boardFilename)
 
 Player::Player(size_t i)
 {
-	//cout << "Qual o nome do player " << i << "? ";
-	//getline(cin, name);
-	//board = Board(Select_file());
-	name[0] = i;
-	board = Board("configBN.txt");
+	do
+	{
+		cin.clear();
+		cout << "Qual o nome do player " << i << "? ";
+		getline(cin, name);
+	} while (cin.eof());
+
+	board = Board(Select_file());
+	//board = Board("configBN.txt");
 	time = 0;
 }
 
