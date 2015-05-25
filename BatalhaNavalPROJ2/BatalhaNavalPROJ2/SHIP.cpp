@@ -3,7 +3,7 @@
 #include <iostream>
 #include "BOARD.h"
 
-//==========================FUNCOES ADICIONAIS ==========================
+//========================== Aceder aos valores ================================
 
 char Ship::get_ship_symbol()
 {
@@ -61,7 +61,9 @@ size_t Ship::get_ship_pos() const
 {
 	return pos;
 }
+
 //=============================================================================
+
 Ship::Ship(char symbol, Position<char> position, char orientation, unsigned int size, unsigned int color, size_t pos)
 {
 	this->symbol = symbol;

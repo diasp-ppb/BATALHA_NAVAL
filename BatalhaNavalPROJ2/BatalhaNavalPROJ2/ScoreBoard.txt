@@ -1,10 +1,9 @@
-aaa         0
-BBBB         0
-joao        20
-joao        20
-Antonio      1000
-Maria      1500
-Joao      2000
-Manel      3000
-Joaoana      4000
-Ana      5000
+Diogo         1       100     30
+Pedro         50      100     30
+Fabio         100     100     30
+Bruno         250     100     30
+Joao          300     100     30
+Miguel        500     100     30
+José          1000    100     30
+Alberto       1500    100     30
+Maria         2000    100     30

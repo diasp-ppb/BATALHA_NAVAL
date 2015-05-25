@@ -28,7 +28,7 @@ public:
 	int getLines() const; // acede ao numero de Linhas
 	int getColumns() const; // acede ao numero de Colunas
 	Ship return_ship(size_t index) const;
-	int get_ships_size() const;
+	int getShipsArea() const; // acede a area ocupada pelos navios
 	vector<Ship> getShips() const; // acede ao vetor de navios
 	friend ostream& operator<<(ostream& os, const Board& board);
 	//=============================================================================

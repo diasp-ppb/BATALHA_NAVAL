@@ -13,7 +13,6 @@
 #include <iomanip>
 #include <ctime>
 
-
 using namespace std;
 
 void print_boards(Player &UM, Player &DOIS);
@@ -23,8 +22,8 @@ void menu();
 int select_menu();
 void playgame();
 void playgameCPU();
-void player_win(Player &UM, Player &DOIS, double &endtime);
-void cpu_win(Player &UM, Player &CPU);
+void player_win(Player &Vencido, Player &Vencedor, double &endtime);
+void cpu_win(Player &Vencido, Player &CPU);
 void shoW_scoreboard();
 
 void main()
@@ -119,6 +118,8 @@ void playgameCPU()
 
 void menu()
 {
+	system("cls");
+	setcolor(LIGHTGRAY, BLACK);
 	cout << "    Batalha Naval" << endl;
 	cout << "1 - Jogar com dois jogadores" << endl;
 	cout << "2 - Jogar contra o computador" << endl;
@@ -166,14 +167,12 @@ int select_menu()
 void print_boards(Player &UM, Player &DOIS)
 {
 	gotoxy(0, 0);
-	cout << setw(15) << UM.get_player_name() << endl;
+	cout << "Tabuleiro de: " << UM.get_player_name() << endl;
 	UM.showBoard();
 	cout << endl;
-	cout << endl;
-	cout << setw(15) << DOIS.get_player_name() << endl;
+	cout << "Tabuleiro de: " << DOIS.get_player_name() << endl;
 	DOIS.showBoard();
-
-	// formula lado a lado: (2 * UM.get_board().getColumns()) + 2 + 5
+	cout << endl;
 }
 
 void player_turn(Player &UM, Player &DOIS)
@@ -188,24 +187,25 @@ void cpu_turn(Player &CPU, Player &DOIS)
 	DOIS.attackBoard(CPU.getBombCPU(DOIS));
 }
 
-void player_win(Player &UM, Player &DOIS, double &endtime)
+void player_win(Player &Vencido, Player &Vencedor, double &endtime)
 {
 	system("cls");
 	setcolor(GREEN, BLACK);
 	cout << "========================================================" << endl;
-	cout << "=  PARABENS " << DOIS.get_player_name() << ", ganhaste!!!" << endl;
+	cout << "=  PARABENS " << Vencedor.get_player_name() << ", ganhaste!!!" << endl;
 	cout << "========================================================" << endl;
 	setcolor(WHITE, BLACK);
-	size_t Area = DOIS.get_board().getColumns() * DOIS.get_board().getLines();
-	size_t score = endtime * (DOIS.get_board().get_ships_size() / Area);
+	int shipsArea = Vencido.get_board().getShipsArea();
+	int Area = Vencido.get_board().getColumns() * Vencido.get_board().getLines();
+	int score = (int)round(endtime * ((double)shipsArea / Area));
 	scoreboard TAB = scoreboard();
 	if (TAB.top_scores(score))
 	{
 		setcolor(RED, BLACK);
-		cout << "ESTAS NO TOP 10!!" << endl;
+		cout << "\nESTAS NO TOP 10!!\n" << endl;
 		setcolor(WHITE, BLACK);
 		system("pause");
-		TAB.update_scoreboard(DOIS.get_player_name(), score);
+		TAB.update_scoreboard(Vencedor.get_player_name(), score, Area, shipsArea);
 		system("cls");
 	}
 	TAB.show_scores();
@@ -213,7 +213,7 @@ void player_win(Player &UM, Player &DOIS, double &endtime)
 	menu();
 }
 
-void cpu_win(Player &UM, Player &CPU)
+void cpu_win(Player &Vencido, Player &CPU)
 {
 	system("cls");
 	cout << "O CPU ganhou desta vez! Tenta novamente!!" << endl;
@@ -224,8 +224,15 @@ void cpu_win(Player &UM, Player &CPU)
 void shoW_scoreboard()
 {
 	system("cls");
-	scoreboard TAB = scoreboard();
-	TAB.show_scores();
+
+	if (!fstream("ScoreBoard.txt"))
+		cout << "Ainda nao existe ficheiro de scores. \nCrie um com o nome \"ScoreBoard.txt\" ou jogue uma vez.\n";
+	else
+	{
+		scoreboard TAB = scoreboard();
+		TAB.show_scores();
+	}
+
 	system("pause");
 	system("cls");
 	menu();

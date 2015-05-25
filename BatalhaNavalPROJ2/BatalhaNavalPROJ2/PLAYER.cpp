@@ -48,20 +48,40 @@ Player::Player(string playerName, string boardFilename)
 	time = 0;
 }
 
-Player::Player(size_t i)
+Player::Player(size_t num)
 {
+	bool valido = true;
+	bool maior = false;
 	do
 	{
 		cin.clear();
-		cout << "Qual o nome do player " << i << "? ";
+		if (maior)
+			cout << "Introduza um nome com 10 ou menos caracteres: ";
+		else if (!valido)
+			cout << "Introduza um nome nao vazio: ";
+		else
+			cout << "Qual o nome do player " << num << "? ";
+
 		getline(cin, name);
-	} while (cin.eof());
+
+		valido = false;
+
+		for (size_t i = 0; i < name.size(); i++)
+			if (name[i] != ' ')
+				valido = true;
+
+		if (valido)
+			if (name.size() > 10)
+				maior = true;
+			else
+				maior = false;
+
+	} while (cin.eof() || !valido || maior);
 
 	board = Board(Select_file());
 	//board = Board("configBN.txt");
 	time = 0;
 }
-
 
 char Player::askCoord()
 {
@@ -176,6 +196,7 @@ bool Player::Player_DEAD() const
 {
 	return board.allShipsDead();
 }
+
 string Player::get_player_name() const
 {
 	return name;
@@ -190,6 +211,7 @@ double Player::get_time() const
 {
 	return time;
 }
+
 void Player::set_time(double _time)
 {
 	time = _time;

@@ -27,7 +27,6 @@ public:
 	double get_time() const;
 	void set_time(double _time);
 	friend ostream& operator<<(ostream& os, const Player& board);
-
 private:
 	string name; // name of the player
 	Board board; // board of the player

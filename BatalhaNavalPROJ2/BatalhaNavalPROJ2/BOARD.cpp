@@ -67,13 +67,15 @@ bool Board::allShipsDead() const
 	return dead;
 }
 
-int Board::get_ships_size() const
+int Board::getShipsArea() const
 {
 	int a = 0;
+
 	for (size_t i = 0; i < ships.size(); i++)
 	{
 		a = a + ships[i].get_ship_size();
 	}
+
 	return a;
 }
 
@@ -107,6 +109,7 @@ Board::Board(const string &filename)
 	resize_board();
 	place_all_the_ships();
 	set_default_status_all_ships();
+
 }
 
 void Board::remove_ship(unsigned int col, unsigned int lin, unsigned int size, char orientation)
@@ -211,7 +214,7 @@ void Board::moveShips() // tries to randmonly move all the ships of the fleet
 	}
 }
 
-bool Board::attack(const Bomb &b) // NOT DONE
+bool Board::attack(const Bomb &b)
 {
 	bool valid;
 	int linha = b.getActualPosition().lin - 65;
@@ -247,7 +250,11 @@ bool Board::attack(const Bomb &b) // NOT DONE
 		}
 		valid = true;
 	}
-	valid = false;
+	else
+	{
+		cout << "Miss!" << endl;
+		valid = false;
+	}
 	system("pause");
 	return valid;
 }

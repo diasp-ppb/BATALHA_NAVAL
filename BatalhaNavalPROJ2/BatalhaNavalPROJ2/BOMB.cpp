@@ -25,8 +25,8 @@ Position<char> Bomb::getActualPosition() const
 // Bomb Constructor
 Bomb::Bomb(Position<char> targetPosition)
 {
-	unsigned int offset = (rand() % 6);
-	unsigned int line = targetPosition.lin, column = targetPosition.col;
+	int offset = (rand() % 6);
+	int line = targetPosition.lin, column = targetPosition.col;
 
 	targetLine = line;
 	targetColumn = column;
@@ -35,7 +35,7 @@ Bomb::Bomb(Position<char> targetPosition)
 
 	if (offset == 0) // 1/6
 	{
-		unsigned int direction = (rand() % 4); // generates direction of offset
+		int direction = (rand() % 4); // generates direction of offset
 		if (direction == 0) // Norte
 			line--;
 		else if (direction == 1) // Este
@@ -49,7 +49,6 @@ Bomb::Bomb(Position<char> targetPosition)
 	actualLine = line; // stores final line
 	actualColumn = column; // stores final column
 }
-
 
 void Bomb::show() const
 {
