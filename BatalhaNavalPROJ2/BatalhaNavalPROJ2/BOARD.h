@@ -29,6 +29,7 @@ public:
 	int getColumns() const; // acede ao numero de Colunas
 	Ship return_ship(size_t index) const;
 	int get_ships_size() const;
+	vector<Ship> getShips() const; // acede ao vetor de navios
 	friend ostream& operator<<(ostream& os, const Board& board);
 	//=============================================================================
 private:

@@ -1,0 +1,10 @@
+Objectivos defenidos no trabalho realizados com sucesso.
+
+Melhorias:
+´	Menu interativo
+	Modo Player vs CPU
+	Nova classe scoreboard
+	Implementacao de duas formas de fazer o display ( a funcao display e o overload do operador <<)
+	Implementacao de duas formas de tratar o control + z, na escolha do ficheiro, control + z sai do programa,
+em todas a outras situacoes, é tratada como entrada invalida e pede-se outra vez o input
+

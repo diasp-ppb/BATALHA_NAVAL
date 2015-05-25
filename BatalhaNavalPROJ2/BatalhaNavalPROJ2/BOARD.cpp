@@ -48,6 +48,11 @@ int Board::getColumns() const
 	return numColumns;
 }
 
+vector<Ship> Board::getShips() const
+{
+	return ships;
+}
+
 bool Board::allShipsDead() const
 {
 	bool dead = true;
@@ -224,7 +229,7 @@ bool Board::attack(const Bomb &b) // NOT DONE
 		{
 			setcolor(ships[posicao].get_ship_color(), BLACK);
 			cout << "Hit!" << endl;
-			setcolor(WHITE, BLACK);
+			setcolor(LIGHTGRAY, BLACK);
 			if (ships[posicao].get_ship_orientation() == 'H')
 				ships[posicao].attack(coluna - ships[posicao].getColumn());
 			else
@@ -282,7 +287,7 @@ void Board::display() const // displays the colored board during the game
 			cout << ships[i].get_ship_status()[j];
 			}
 	}
-	setcolor(WHITE, BLACK);
+	setcolor(LIGHTGRAY, BLACK);
 	gotoxy(0, numLines + 3);
 }
 
@@ -338,6 +343,6 @@ ostream& operator<<(ostream& os, const Board& board)
 
 		os << endl;
 	}
-	setcolor(WHITE, BLACK);
+	setcolor(LIGHTGRAY, BLACK);
 	return os;
 }

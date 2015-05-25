@@ -122,6 +122,45 @@ Bomb Player::getBomb()
 	return bomba;
 }
 
+Bomb Player::getBombCPU(Player &DOIS)
+{
+
+	char lin, col;
+	Position<char> target;
+	vector<Ship> navios = DOIS.get_board().getShips();
+	bool coord = false;
+	for (int i = 0; i < navios.size() && !coord; i++)
+	{
+		if (!navios[i].isDestroyed())
+		{
+			for (int j = 0; j < navios[i].get_ship_size() && !coord; j++)
+			{
+				if (navios[i].get_ship_status()[j] < 'a')
+				{
+					if (navios[i].get_ship_orientation() == 'H')
+					{
+						col = navios[i].getColumn() + j;
+						lin = navios[i].getLine();
+					}
+					else
+					{
+						lin = navios[i].getLine() + j;
+						col = navios[i].getColumn();
+					}
+					coord = true;
+				}
+			}
+		}
+	}
+
+	target.lin = lin + 65;
+	target.col = col + 97;
+
+	Bomb bomba = Bomb(target);
+
+	return bomba;
+}
+
 void Player::attackBoard(const Bomb &b)
 {
 	board.moveShips();

@@ -4,6 +4,7 @@
 #include "TYPES.h"
 #include "BOMB.h"
 #include "BOARD.h"
+#include "SHIP.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
 	Player(size_t i);
 	void showBoard() const; // shows the player’s board 
 	Bomb getBomb(); // asks bomb target coordinates and creates the bomb
+	Bomb getBombCPU(Player &DOIS);
 	void attackBoard(const Bomb &b); // "receives" a bomb from the opponent;
 	// updates own board taking into account the damages
 	// caused by the bomb; BEFORE THAT… moves the ships
