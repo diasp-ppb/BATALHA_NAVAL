@@ -122,6 +122,7 @@ int select_menu()
 void print_boards(Player &UM, Player &DOIS)
 {
 	gotoxy(0, 0);
+	setcolor(WHITE, BLACK);
 	cout << setw(15) << UM.get_player_name() << endl;
 	UM.showBoard();
 	cout << endl;

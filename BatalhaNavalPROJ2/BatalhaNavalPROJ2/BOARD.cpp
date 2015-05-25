@@ -282,7 +282,7 @@ void Board::display() const // displays the colored board during the game
 			cout << ships[i].get_ship_status()[j];
 			}
 	}
-	setcolor(LIGHTGRAY, BLACK);
+	setcolor(WHITE, BLACK);
 	gotoxy(0, numLines + 3);
 }
 
@@ -325,11 +325,11 @@ ostream& operator<<(ostream& os, const Board& board)
 				setcolor(board.return_ship(posicao).get_ship_color(), LIGHTGRAY);
 				if (board.return_ship(posicao).get_ship_orientation() == 'H')
 				{
-					os << setw(2) << board.return_ship(posicao).get_ship_partition(j - board.return_ship(posicao).getColumn());
+					os << " " << board.return_ship(posicao).get_ship_partition(j - board.return_ship(posicao).getColumn());
 				}
 				else
 				{
-					os << setw(2) << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).getLine());
+					os << " " << board.return_ship(posicao).get_ship_partition(i - board.return_ship(posicao).getLine());
 				}
 			}
 			if (j == (board.getColumns() - 1))
